@@ -90,7 +90,6 @@ tbody tr.past .case,tbody tr.past .spec b{color:#4C5449}
 .t-live{background:var(--live-bg); color:var(--live)}
 .t-warm{background:var(--warm-bg); color:var(--warm)}
 .t-off{background:var(--off-bg); color:var(--off)}
-.listed{font-size:14px; color:var(--dim); margin-top:9px; white-space:nowrap}
 
 .links{display:flex; flex-direction:column; gap:8px}
 .go{
@@ -150,7 +149,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
 <header>
   <div class="eyebrow">PROPERTY PAGES · 內部台帳</div>
   <h1>物件一頁式　管理台帳</h1>
-  <div class="sub">瑞禾開發／睦聚　·　成品站 <span class="mono">mac2good909777-commits/properties</span></div>
+  <div class="sub">瑞禾開發／睦聚　·　本頁即物件總覽，成品站無首頁，一律從這裡取連結</div>
 </header>
 
 <div class="tally">
@@ -196,7 +195,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>08/23</b>更新 08/26</td>
     <td>
       <span class="tag t-live">在售</span>
-      <div class="listed">已掛公開總覽</div>
     </td>
     <td>
       <div class="links">
@@ -218,7 +216,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>08/27</b>更新 08/27</td>
     <td>
       <span class="tag t-live">在售</span>
-      <div class="listed">已掛公開總覽</div>
     </td>
     <td>
       <div class="links">
@@ -240,7 +237,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>08/25</b>更新 08/26</td>
     <td>
       <span class="tag t-live">在租</span>
-      <div class="listed">已掛公開總覽</div>
     </td>
     <td>
       <div class="links">
@@ -262,7 +258,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>08/25</b>更新 09/04</td>
     <td>
       <span class="tag t-live">在售</span>
-      <div class="listed">已掛公開總覽</div>
     </td>
     <td>
       <div class="links">
@@ -285,7 +280,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>09/04</b>更新 09/04</td>
     <td>
       <span class="tag t-live">在售</span>
-      <div class="listed">已掛公開總覽</div>
     </td>
     <td>
       <div class="links">
@@ -308,7 +302,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>09/04</b>更新 09/04</td>
     <td>
       <span class="tag t-live">在售</span>
-      <div class="listed">已掛公開總覽</div>
     </td>
     <td>
       <div class="links">
@@ -330,7 +323,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>08/23</b>更新 08/24</td>
     <td>
       <span class="tag t-off">已結案</span>
-      <div class="listed">不掛總覽</div>
     </td>
     <td>
       <div class="links">
@@ -352,7 +344,6 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
     <td class="date"><b>08/28</b>更新 08/28</td>
     <td>
       <span class="tag t-warm">顧問頁</span>
-      <div class="listed">不掛總覽</div>
     </td>
     <td>
       <div class="links">
@@ -414,7 +405,6 @@ python .../properties-admin/build.py --build    # 重建（可加案名只重建
   <li>移除原稿自帶的團隊區塊，套上標準版</li>
   <li><span class="k">team:full</span> 主版四卡；<span class="k">team:none</span> 不套（顧問頁、已結案）</li>
   <li><span class="k">brief:true</span> 產簡版分身，兩卡＋<span class="k">noindex</span></li>
-  <li><span class="k">on_index:true</span> 收進公開總覽 —— <b style="color:var(--ink)">整份自動重生，不要手改</b></li>
   <li>原稿 sha256 記入 <span class="k">manifest.json</span>，供下次比對</li>
 </ol>
 
@@ -431,7 +421,7 @@ Drive 有同步，所以做完就 push，不要留未推送的 commit 過夜。<
   <li>簡版接 <span class="k">b</span>；主目錄已含亂碼後綴者接 <span class="k">-b</span></li>
   <li><b style="color:var(--ink)">上線後不改名、不刪除、不搬家</b> —— 連結已發出去，斷了就是客戶開到 404</li>
   <li>結案物件保留頁面與路徑，只降狀態</li>
-  <li>各分頁不得連回總覽，也不得連回本台帳</li>
+  <li>各分頁不得連回本台帳，也不得互相連結</li>
   <li>對外導流只允許四個：關於瑞禾、關於現傑、睦聚現傑、購廠分析</li>
   <li>照片一律 base64 內嵌 —— 單檔要能直接寄送、離線可讀</li>
 </ul>

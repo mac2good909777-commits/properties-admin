@@ -19,7 +19,7 @@ C  properties-admin  private，不開 Pages  build.py + cases.json + manifest.js
 
 ```
 產出這個物件的一頁式行銷頁，做完 push 到「原稿庫」repo。
-成品頁、簡版分身、公開總覽、管理台帳都不用做 ——
+成品頁、簡版分身、管理台帳都不用做 ——
 那些由「主題行銷頁」對話從原稿建置。
 
 【原稿庫位置】
@@ -53,7 +53,7 @@ PropCode：[英文目錄代號]
 
 【不要做的】
 - 不要做頁尾「認識專案團隊」區塊 —— 建置時統一套上，自己做的會被整段換掉
-- 不要做簡版分身、不要改公開總覽、不要動 properties repo
+- 不要做簡版分身、不要動 properties repo
 - 不要連回任何索引或管理頁
 
 【對外導流只允許這四個】
@@ -98,7 +98,6 @@ cd C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/propertie
 2. `team:full` → 主版插入完整版四卡；`team:none` → 不插（顧問頁、已結案）
 3. `brief:true` → 產簡版分身 `<PropCode>b`（亂碼後綴目錄用 `-b`），兩卡＋`noindex`
 4. `noindex_main:true` → 主版也加 `noindex`
-5. `on_index:true` → 收進公開總覽 `properties/index.html`（**整份自動重生**，不要手改）
 6. 記錄原稿 `sha256` 到 `manifest.json`，供下次比對
 
 **推送：**

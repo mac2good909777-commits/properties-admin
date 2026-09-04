@@ -18,8 +18,7 @@ build.py　—— 由原稿 A 產生成品 B
     2. 依 cases.json 套「認識專案團隊」完整版四卡 → 寫 B/<code>/index.html
     3. brief=true 者產簡版兩卡 + noindex → 寫 B/<code>b/index.html
     4. noindex_main=true 者主版也加 noindex
-    5. on_index=true 者收進 B/index.html 公開總覽（自動重生）
-    6. 記錄原稿 sha256 到 manifest.json，供下次比對
+    5. 記錄原稿 sha256 到 manifest.json，供下次比對
 
 原稿內若自帶「認識專案團隊」區塊會被整段移除再換上標準版。
 """
@@ -113,53 +112,6 @@ def brief_code(code):
     """簡版目錄：一般接 b；含「-」亂碼後綴者接 -b。"""
     return code + ("-b" if "-" in code else "b")
 
-# ---------------------------------------------------------------- 公開總覽
-
-INDEX_TPL = """<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>物件介紹｜瑞禾・睦聚</title>
-<meta name="robots" content="noindex">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-:root{--forest:#2B5937;--gold:#C0A434;--ink:#26302A;--muted:#67705F;--border:#E8E6E1}
-*{margin:0;padding:0;box-sizing:border-box}
-html{color-scheme:light}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:#FDFCFA;color:#39433A;font-size:16px;line-height:1.75}
-.wrap{max-width:760px;margin:0 auto;padding:64px 24px}
-.eyebrow{font-size:14px;letter-spacing:5px;color:var(--gold);font-weight:700;margin-bottom:10px}
-h1{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:2px;margin-bottom:6px}
-.lead{font-size:16px;color:var(--muted);margin-bottom:40px}
-a.card{display:block;border:1px solid var(--border);border-radius:3px;padding:24px 26px;text-decoration:none;margin-bottom:16px;transition:.2s;background:#fff}
-a.card:hover{border-color:var(--gold);box-shadow:0 10px 26px rgba(43,89,55,.10);transform:translateY(-2px)}
-a.card .t{font-size:20px;font-weight:900;color:var(--ink);letter-spacing:1px}
-a.card .s{font-size:15px;color:var(--muted);margin-top:4px}
-a.card .go{float:right;color:var(--gold);font-weight:900}
-footer{margin-top:56px;font-size:14px;color:#AAA;letter-spacing:1px}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="eyebrow">PROPERTY LISTINGS</div>
-  <h1>物件介紹</h1>
-  <div class="lead">各物件詳細資料與完整銷售報告書，請洽各頁專案窗口。</div>
-
-%s
-  <footer>&copy; 瑞禾不動產經紀股份有限公司｜TEL 04-2380-3560</footer>
-</div>
-</body>
-</html>
-"""
-
-CARD_TPL = """  <a class="card" href="./%s/">
-    <span class="go">&rarr;</span>
-    <div class="t">%s</div>
-    <div class="s">%s</div>
-  </a>
-"""
-
 # ---------------------------------------------------------------- 主流程
 
 def load_cases():
@@ -230,11 +182,6 @@ def build(cases, only=None):
     return done
 
 
-def build_index(cases):
-    cards = "".join(CARD_TPL % (c["code"], c["card"]["title"], c["card"]["sub"])
-                    for c in cases if c.get("on_index") and c.get("card"))
-    io.open(os.path.join(DST, "index.html"), "w", encoding="utf-8").write(INDEX_TPL % cards)
-    return cards.count('<a class="card"')
 
 
 if __name__ == "__main__":
@@ -243,7 +190,6 @@ if __name__ == "__main__":
     if "--build" in sys.argv:
         for code, made in build(cases, args or None):
             print("建置 %-16s -> %s" % (code, "、".join(made)))
-        print("公開總覽 %d 張卡片" % build_index(cases))
     else:
         rows = check(cases)
         if not rows:
