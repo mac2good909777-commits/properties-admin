@@ -382,6 +382,35 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
   </div>
 </div>
 
+<h2>版型統一</h2>
+<div class="panel">
+<p>八個案子的原稿版型各不相同（八種 hero、八種 footer）。客戶從電子報點不同案，
+版面一直變會顯得不專業，因此建置時把每頁的<b style="color:var(--ink)">最上與最下換成同一套</b>。
+模板取自 <span class="k">TCIP3464</span>（有底圖）與 <span class="k">WangTian5483</span>（文字型）。</p>
+
+<span class="lbl">HERO</span>
+<ul>
+  <li>有底圖：室內照 ＋ 深色遮罩，左側瑞禾 LOGO 白底方塊</li>
+  <li>無底圖：同結構，背景改深綠漸層</li>
+  <li>金框標籤 → 大標題 → 副標 → 兩顆按鈕（金色電話＋線框次要動作）</li>
+  <li>下接 KPI 條：深綠底四格金色數字</li>
+</ul>
+
+<span class="lbl">底圖來源</span>
+<p style="margin:0"><span class="k">cases.json</span> 的 <span class="k">hero.image</span>：
+<span class="k">null</span> 文字型／<span class="k">"keep"</span> 沿用原頁底圖／數字 取頁內第 N 張圖。
+現況：關連766、TCIP3464、大埔美 沿用原底圖；工業區21路 取第 0 張；王田5483、中台1300、台中2098 用文字型。</p>
+
+<span class="lbl">Footer</span>
+<p style="margin:0">全站同一份：公司名（中英）、地址、專案負責人 張現傑 0953-909-777、
+不動產經紀人字號、免責聲明。<b style="color:var(--ink)">公司市話一律不放。</b></p>
+
+<span class="lbl">程式</span>
+<p style="margin:0"><span class="k">layout.py</span>，由 <span class="k">build.py</span> 在建置時呼叫。
+原稿自帶的 hero 與 footer 會被整段換掉，各專案不需要也不應該自己做。
+顧問頁 <span class="k">TCIP38-parking</span> 窗口不同，未納入。</p>
+</div>
+
 <h2>三層架構</h2>
 <div class="panel">
 <div class="flow">A  properties-src    原稿。各專案 push 到這裡
