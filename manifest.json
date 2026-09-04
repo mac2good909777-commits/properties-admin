@@ -1,0 +1,56 @@
+{
+  "Guanlian766": {
+    "outputs": [
+      "Guanlian766",
+      "Guanlian766b"
+    ],
+    "src_sha256": "fc929b366536d0fb641a104cb71b48942975b954d6a01077ab62e41f8a0959e2"
+  },
+  "HotaChiayi3": {
+    "outputs": [
+      "HotaChiayi3"
+    ],
+    "src_sha256": "26499cbdfc29f8412432a283139d7060738dfa839d167b59b85b20630ae792a7"
+  },
+  "Industrial21": {
+    "outputs": [
+      "Industrial21",
+      "Industrial21b"
+    ],
+    "src_sha256": "5dc73b1ef5f0ed2ff87a96e8e41531499e66ff6d8ab2fa82208c1d403e0207f9"
+  },
+  "TCIP2098": {
+    "outputs": [
+      "TCIP2098",
+      "TCIP2098b"
+    ],
+    "src_sha256": "f86116c7696ca350f34ce70e77170605fc9c0e1d1519b7a3c05d0ba15aafe975"
+  },
+  "TCIP3464": {
+    "outputs": [
+      "TCIP3464",
+      "TCIP3464b"
+    ],
+    "src_sha256": "685c7c9b1ce6f98cf92574f2eb156690f5234655eb21388ee1601885964432ce"
+  },
+  "TCIP38-parking": {
+    "outputs": [
+      "TCIP38-parking"
+    ],
+    "src_sha256": "861a93dd8b4950684e581f9388ac14e0a2e48a89c0746e495c6b3312b5891848"
+  },
+  "WangTian5483": {
+    "outputs": [
+      "WangTian5483",
+      "WangTian5483b"
+    ],
+    "src_sha256": "db3fc87bc4802f897c765798b3ccd1fdd3d7eb882d61aa1978956323e5a7d0da"
+  },
+  "ct1300-e58a": {
+    "outputs": [
+      "ct1300-e58a",
+      "ct1300-e58a-b"
+    ],
+    "src_sha256": "f2524c15c33d13afaba38df7336daa6c499638498ecf5f4aeb9e4e91318400c1"
+  }
+}
