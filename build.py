@@ -24,6 +24,8 @@ build.py　—— 由原稿 A 產生成品 B
 """
 import hashlib, io, json, os, re, sys
 
+import layout   # 統一 HERO／KPI／footer
+
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 SRC   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src"
 DST   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties"
@@ -159,6 +161,10 @@ def build(cases, only=None):
         if not os.path.isfile(src):
             print("略過 %-16s 原稿不存在" % c["code"]); continue
         raw = io.open(src, encoding="utf-8").read()
+
+        # 版型統一：換掉原頁 hero 與 footer（顧問頁等無 hero 設定者跳過）
+        if c.get("hero"):
+            raw = layout.apply(raw, c["hero"])
 
         full = with_team(raw, True) if c.get("team") == "full" else strip_team(raw)
         if c.get("noindex_main"):

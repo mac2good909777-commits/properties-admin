@@ -11,101 +11,356 @@
     "price": "台帳開價欄",
     "spec": "台帳規模欄（可含 HTML）",
     "type": "台帳類型欄（可含 HTML）",
-    "note": "台帳備註"
+    "note": "台帳備註",
+    "hero": "hero 設定：image（null 文字型／keep 沿用原頁底圖／數字 取第 N 張頁內圖）、eyebrow、title、sub、cta2、kpis[4]"
   },
-
   "cases": [
     {
       "code": "WangTian5483",
       "name": "王田 5483",
       "loc": "臺中市大肚區・正沙田路",
-      "kind": "sale", "status": "live",
-      "team": "full", "brief": true, "noindex_main": true,
+      "kind": "sale",
+      "status": "live",
+      "team": "full",
+      "brief": true,
+      "noindex_main": true,
       "price": "備索",
       "type": "售<br><b>土地・整廠</b>",
       "spec": "<b>5,483 坪</b>　乙種工業區<br>臨路面寬 110 米・正 30 米沙田路<br>王田交流道 2.3 KM",
-      "note": ""
+      "note": "",
+      "hero": {
+        "image": null,
+        "eyebrow": "乙種工業區・逾五千坪產業用地",
+        "title": "王田 5483",
+        "sub": "正 30 米沙田路・臨路面寬 110 米｜王田交流道 2.3 KM｜臺中市大肚區",
+        "cta2": {
+          "label": "索取完整銷售報告書",
+          "href": "#contact"
+        },
+        "kpis": [
+          [
+            "5,483",
+            "坪",
+            "基地規模"
+          ],
+          [
+            "110",
+            "米",
+            "臨路面寬"
+          ],
+          [
+            "30",
+            "米",
+            "正臨沙田路"
+          ],
+          [
+            "2.3",
+            "KM",
+            "王田交流道"
+          ]
+        ]
+      }
     },
     {
       "code": "Guanlian766",
       "name": "關連三照合法美廠房",
       "loc": "臺中市梧棲區・台中港關連工業區",
-      "kind": "sale", "status": "live",
-      "team": "full", "brief": true, "noindex_main": true,
+      "kind": "sale",
+      "status": "live",
+      "team": "full",
+      "brief": true,
+      "noindex_main": true,
       "price": "2.83 億",
       "type": "售　<b>專任委託</b><br>特種工業區",
       "spec": "建物 <b>766 坪</b>（1F 503＋2F 257）<br>土地 786.5 坪（3 筆）21.6m &times; 115.8m<br>鋼骨造 SC・屋齡 5.9 年・三照齊備",
-      "note": ""
+      "note": "",
+      "hero": {
+        "image": "keep",
+        "eyebrow": "特種工業區・三照齊備・鋼骨造屋齡 5.9 年",
+        "title": "關連三照合法美廠房",
+        "sub": "建物 766 坪雙層・土地 786.5 坪｜台 61 安良港交流道 500 公尺｜臺中市梧棲區",
+        "cta2": {
+          "label": "索取完整銷售報告書",
+          "href": "#contact"
+        },
+        "kpis": [
+          [
+            "766",
+            "坪",
+            "建物雙層　1F 503＋2F 257"
+          ],
+          [
+            "786.5",
+            "坪",
+            "土地　共 3 筆"
+          ],
+          [
+            "5.9",
+            "年",
+            "鋼骨造 SC・C2 工廠"
+          ],
+          [
+            "500",
+            "公尺",
+            "台 61 安良港交流道"
+          ]
+        ]
+      }
     },
     {
       "code": "TCIP3464",
       "name": "台中工業區 樓層式廠辦",
       "loc": "台中工業區・國道 1 號台中交流道 3 KM",
-      "kind": "rent", "status": "live",
-      "team": "full", "brief": true, "noindex_main": true,
+      "kind": "rent",
+      "status": "live",
+      "team": "full",
+      "brief": true,
+      "noindex_main": true,
       "price": "洽詢",
       "type": "<b>招租</b><br>乙種工業區",
       "spec": "招租總面積 <b>3,464 坪</b><br>樓高 5 米・臨路 18 米<br>卸貨碼頭＋2 噸貨梯・整層可租",
-      "note": ""
+      "note": "",
+      "hero": {
+        "image": "keep",
+        "eyebrow": "乙種工業區・倉儲物流・科技廠辦",
+        "title": "台中工業區　樓層式千坪廠辦招租",
+        "sub": "國道 1 號台中交流道約 3 公里｜卸貨碼頭・貨梯 1 部載重 2 噸｜整層即可承租",
+        "cta2": {
+          "label": "查看樓層面積表",
+          "href": "#floors"
+        },
+        "kpis": [
+          [
+            "3,464",
+            "坪",
+            "招租總面積"
+          ],
+          [
+            "18",
+            "米",
+            "臨路寬度"
+          ],
+          [
+            "5",
+            "米",
+            "樓高（使照）"
+          ],
+          [
+            "2",
+            "噸",
+            "貨梯載重・卸貨碼頭"
+          ]
+        ]
+      }
     },
     {
       "code": "ct1300-e58a",
       "name": "中台樓層式 1300",
       "loc": "台中都會區・經濟部編定大型工業區內",
-      "kind": "sale", "status": "live",
-      "team": "full", "brief": true, "noindex_main": true,
+      "kind": "sale",
+      "status": "live",
+      "team": "full",
+      "brief": true,
+      "noindex_main": true,
       "price": "備索",
       "type": "售<br>乙種工業區",
       "spec": "土地約 <b>1,000 坪</b>／建物約 <b>1,300 坪</b>級<br>4 層・1F 挑高 5 米・55m &times; 65m<br>三照齊全・單一法人產權",
-      "note": "2026-09-04 由潛銷轉對外；目錄名保留亂碼後綴（不改名）"
+      "note": "2026-09-04 由潛銷轉對外；目錄名保留亂碼後綴（不改名）",
+      "hero": {
+        "image": null,
+        "eyebrow": "乙種工業區・整棟釋出",
+        "title": "中台樓層式 1300",
+        "sub": "千坪基地・約 1,300 坪級樓層式廠辦｜台中都會區・經濟部編定大型工業區內",
+        "cta2": {
+          "label": "索取完整資料",
+          "href": "#contact"
+        },
+        "kpis": [
+          [
+            "約 1,000",
+            "坪",
+            "基地規模（級距）"
+          ],
+          [
+            "約 1,300",
+            "坪級",
+            "合法建物面積"
+          ],
+          [
+            "4",
+            "層",
+            "1F 挑高 5 米"
+          ],
+          [
+            "三照",
+            "齊全",
+            "工廠登記・營業登記"
+          ]
+        ]
+      }
     },
     {
       "code": "Industrial21",
       "name": "工業區 21 路帶照案",
       "loc": "臺中市南屯區・台中工業區內",
-      "kind": "sale", "status": "live",
-      "team": "full", "brief": true, "noindex_main": true,
+      "kind": "sale",
+      "status": "live",
+      "team": "full",
+      "brief": true,
+      "noindex_main": true,
       "price": "備索",
       "type": "售<br><b>帶建照素地</b>",
       "spec": "土地 <b>701.49 坪</b>（2,319 ㎡）乙種工業區<br>建照核准總樓地板 2,086 坪・SC 5F+B1<br>臨 10 米路・面寬 34.4m・交流道 1.7 KM",
-      "note": ""
+      "note": "",
+      "hero": {
+        "image": 0,
+        "eyebrow": "乙種工業區・帶建造執照素地",
+        "title": "工業區 21 路帶照案",
+        "sub": "土地 701.49 坪｜建照核准總樓地板 2,086 坪・SC 5F+B1｜臺中市南屯區",
+        "cta2": {
+          "label": "索取完整銷售報告書",
+          "href": "#contact"
+        },
+        "kpis": [
+          [
+            "701.49",
+            "坪",
+            "土地面積　2,319 ㎡"
+          ],
+          [
+            "2,086",
+            "坪",
+            "建照核准總樓地板"
+          ],
+          [
+            "34.4",
+            "米",
+            "臨路面寬・臨 10 米道路"
+          ],
+          [
+            "1.7",
+            "KM",
+            "距最近交流道"
+          ]
+        ]
+      }
     },
     {
       "code": "TCIP2098",
       "name": "台中工業區 2098",
       "loc": "臺中市西屯區・台中工業區內",
-      "kind": "buyer", "status": "live",
-      "team": "full", "brief": true, "noindex_main": true,
+      "kind": "buyer",
+      "status": "live",
+      "team": "full",
+      "brief": true,
+      "noindex_main": true,
       "price": "備索",
       "type": "<b>買方一頁式</b><br>素地",
       "spec": "基地 <b>2,098 坪</b>　單一地號完整釋出<br>臨 16 米園區道路・路口位置<br>國道 1 號台中交流道約 3 KM",
-      "note": ""
+      "note": "",
+      "hero": {
+        "image": null,
+        "eyebrow": "乙種工業區・素地單一地號",
+        "title": "台中工業區 2098",
+        "sub": "兩千坪素地・單一地號完整釋出｜臨 16 米園區道路・路口位置｜臺中市西屯區",
+        "cta2": {
+          "label": "索取完整銷售報告書",
+          "href": "#contact"
+        },
+        "kpis": [
+          [
+            "2,098",
+            "坪",
+            "基地規模"
+          ],
+          [
+            "16",
+            "米",
+            "臨路路寬"
+          ],
+          [
+            "約 3",
+            "KM",
+            "台中交流道"
+          ],
+          [
+            "1",
+            "筆",
+            "單一地號完整釋出"
+          ]
+        ]
+      }
     },
     {
       "code": "ct1300-e58a-legacy-placeholder",
       "_disabled": true,
       "name": "（保留欄位範例，不會被處理）",
-      "loc": "", "kind": "sale", "status": "quiet",
-      "team": "none", "brief": false, "noindex_main": true,
-      "price": "", "type": "", "spec": "", "note": ""
+      "loc": "",
+      "kind": "sale",
+      "status": "quiet",
+      "team": "none",
+      "brief": false,
+      "noindex_main": true,
+      "price": "",
+      "type": "",
+      "spec": "",
+      "note": ""
     },
     {
       "code": "HotaChiayi3",
       "name": "大埔美 8881",
       "loc": "嘉義縣大林鎮・大埔美精密機械園區",
-      "kind": "sale", "status": "done",
-      "team": "none", "brief": false, "noindex_main": true,
+      "kind": "sale",
+      "status": "done",
+      "team": "none",
+      "brief": false,
+      "noindex_main": true,
       "price": "備索",
       "type": "售　<b>整廠</b><br>丁種建築用地",
       "spec": "土地 <b>9,127 坪</b>／建物 <b>8,881 坪</b><br>1F 樓高 7 米・2F 載重 1,500 kg/&#13217;<br>大埔美精密機械園區",
-      "note": "一次性物件・不會再上架。頁面與資料保留備查，路徑不動（避免既發連結失效）"
+      "note": "一次性物件・不會再上架。頁面與資料保留備查，路徑不動（避免既發連結失效）",
+      "hero": {
+        "image": "keep",
+        "eyebrow": "工業區・丁種建築用地・整廠釋出",
+        "title": "大埔美 8881",
+        "sub": "土地 9,127 坪＋建物 8,881 坪｜國道 3 號梅山交流道約 3 分鐘｜嘉義縣大林鎮",
+        "cta2": {
+          "label": "索取完整資料",
+          "href": "#contact"
+        },
+        "kpis": [
+          [
+            "9,127",
+            "坪",
+            "土地面積"
+          ],
+          [
+            "8,881",
+            "坪",
+            "建物總面積"
+          ],
+          [
+            "7",
+            "米",
+            "一樓樓高"
+          ],
+          [
+            "1,500",
+            "kg/㎡",
+            "二樓地板載重"
+          ]
+        ]
+      }
     },
     {
       "code": "TCIP38-parking",
       "name": "工業區二十路案　前院停車配置建議",
       "loc": "臺中市南屯區・台中工業區內",
-      "kind": "advisory", "status": "other",
-      "team": "none", "brief": false, "noindex_main": true,
+      "kind": "advisory",
+      "status": "other",
+      "team": "none",
+      "brief": false,
+      "noindex_main": true,
       "price": "&mdash;",
       "type": "<b>顧問提案頁</b><br>非銷售物件",
       "spec": "前院約 <b>60m &times; 20m</b>（&#8776;1,200 &#13217;）<br>建議 <b>32 席</b>小客車（區間 30&ndash;34）<br>雙排對停・拆守衛室改車牌辨識",
