@@ -311,32 +311,46 @@ thead th:nth-child(4),tbody td:nth-child(4),thead th:nth-child(7),tbody td:nth-c
 </tbody>
 </table>
 
-<h2>收頁流程　—— 各專案自行 push，這裡統一一致化</h2>
+<h2>A / B / C 三層架構</h2>
 <div class="panel">
-<b>分工：</b>各物件專案做內容並自行 <code>push</code> 到公開 repo；
-一致化、簡版分身、公開總覽、台帳由「主題行銷頁」對話統一處理。
-repo 本身就是交件通道，不需要另外交本機路徑。
+<div class="tree">A  properties-src    public，不開 Pages   原稿。各專案 push 到這裡
+        │
+        │  build.py（在 C）依 cases.json 建置
+        ▼
+B  properties        public，開 Pages     成品。只有本對話寫入
+                                          https://mac2good909777-commits.github.io/properties/&lt;PropCode&gt;/
 
-<span class="lbl">收頁指令</span>
-<div class="tree">cd C:/Claude/projects/properties
+C  properties-admin  private，不開 Pages  build.py + cases.json + manifest.json + 本台帳</div>
+
+各專案只碰 A，B 的網址永遠不變。C 只有本人看得到。
+
+<span class="lbl">日常操作</span>
+<div class="tree"># 一、看 A 有哪些異動還沒反映到 B
+cd C:/Claude/projects/properties-src
 git pull --rebase origin main
-python C:/Claude/projects/properties-admin/collect.py          # 乾跑，只列不合規的
-python C:/Claude/projects/properties-admin/collect.py --fix    # 實際套用</div>
+python C:/Claude/projects/properties-admin/build.py
 
-<span class="lbl">collect.py 自動做的事</span>
+# 二、重建（可加案名只重建指定案）
+cd C:/Claude/projects/properties
+python C:/Claude/projects/properties-admin/build.py --build
+
+# 三、推送
+git add -A &amp;&amp; git commit -m "重建 &lt;案名&gt;" &amp;&amp; git push origin main</div>
+
+<span class="lbl">build.py 依 cases.json 自動完成</span>
 <ol>
-  <li>掃出缺完整版四卡、或缺簡版分身的目錄</li>
-  <li>主版套上「認識專案團隊」完整版四卡（插在 <code>&lt;footer&gt;</code> 前）</li>
-  <li>產出簡版分身 <code>&lt;PropCode&gt;b</code>（亂碼後綴目錄用 <code>-b</code>），只留 關於瑞禾＋關於現傑</li>
-  <li>簡版加 <code>noindex,nofollow</code></li>
-  <li>各 session 自行做的殘缺團隊區塊，整段移除後換上標準版</li>
+  <li>讀 A 原稿，移除任何自帶的團隊區塊</li>
+  <li><code>team:full</code> → 主版插入完整版四卡；<code>team:none</code> → 不插（顧問頁、已結案）</li>
+  <li><code>brief:true</code> → 產簡版分身（亂碼後綴目錄用 <code>-b</code>），兩卡＋<code>noindex</code></li>
+  <li><code>noindex_main:true</code> → 主版也加 <code>noindex</code></li>
+  <li><code>on_index:true</code> → 收進公開總覽，<b>整份自動重生，不要手改</b></li>
+  <li>原稿 <code>sha256</code> 記入 <code>manifest.json</code>，供下次比對是否需重建</li>
 </ol>
-例外清單在 <code>collect.py</code> 的 <code>SKIP</code>：顧問頁、已結案、以及使用原生 <code>.more-card</code> 的 <code>WangTian5483(+b)</code>。
 
-<span class="lbl">收完仍需手動的兩件事</span>
+<span class="lbl">新案要做的兩件事</span>
 <ul>
-  <li><b>公開總覽</b>：在售／在租案在 <code>properties\index.html</code> 補一張 <code>&lt;a class="card"&gt;</code>；潛銷、已結案、顧問頁、簡版分身不補</li>
-  <li><b>本台帳</b>：補列，完整版與簡版各一列</li>
+  <li><code>cases.json</code> 補一筆設定 —— 沒登錄的案子檢查時會報「A 有新案，cases.json 尚未登錄」，不會漏</li>
+  <li>本台帳補列（完整版與簡版各一列）</li>
 </ul>
 
 給各物件專案的提示詞在 <code>PROMPT-一頁式收頁.md</code> 的 A 段。
@@ -409,7 +423,7 @@ python C:/Claude/projects/properties-admin/collect.py --fix    # 實際套用</d
 
 <span class="lbl">現況盤點（2026-09-04 完成）</span>
 <ul>
-  <li><span class="st st-on">完整＋簡版</span> <code>WangTian5483</code> / <code>WangTian5483b</code>　—— 使用該頁原生 <code>.more-card</code> 實作，視覺一致，未改寫</li>
+  <li><span class="st st-on">完整＋簡版</span> <code>WangTian5483</code> / <code>WangTian5483b</code>　—— 09/04 已統一改用 <code>kya</code> 區塊，原生 <code>.more-card</code> 例外取消</li>
   <li><span class="st st-on">完整＋簡版</span> <code>Guanlian766</code> / <code>Guanlian766b</code></li>
   <li><span class="st st-on">完整＋簡版</span> <code>TCIP3464</code> / <code>TCIP3464b</code></li>
   <li><span class="st st-on">完整＋簡版</span> <code>ct1300-e58a</code> / <code>ct1300-e58a-b</code></li>
@@ -436,7 +450,7 @@ python C:/Claude/projects/properties-admin/collect.py --fix    # 實際套用</d
 </ul>
 </div>
 
-<footer>物件一頁式管理台帳　&middot;　最後整理 2026-09-04（properties 已同步至 4ef3bf8）　&middot;　僅供內部使用</footer>
+<footer>物件一頁式管理台帳　&middot;　最後整理 2026-09-04（A/B/C 三層架構・properties 已同步至 cf89d45）　&middot;　僅供內部使用</footer>
 
 </div>
 <script>

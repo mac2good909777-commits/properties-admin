@@ -1,16 +1,32 @@
-# 一頁式行銷頁　製作與收頁
+# 一頁式行銷頁　A / B / C 三層架構
 
-分工：**各物件專案做內容並自行 push；一致化、簡版、總覽、台帳由「主題行銷頁」對話統一處理。**
+```
+A  properties-src    public，不開 Pages   原稿。各專案 push 到這裡
+        │
+        │  build.py（在 C）依 cases.json 建置
+        ▼
+B  properties        public，開 Pages     成品。只有「主題行銷頁」對話寫入
+                                          網址 https://mac2good909777-commits.github.io/properties/<PropCode>/
 
-repo 本身就是交件通道，不需要另外交路徑。各專案 push 完什麼都不用管。
+C  properties-admin  private，不開 Pages  build.py + cases.json + manifest.json + 管理台帳
+```
+
+各專案只碰 A，B 的網址永遠不變。C 是私人的，只有本人看得到。
 
 ---
 
-## A. 給各物件專案的提示詞（複製這段）
+## A 段　給各物件專案的提示詞（複製這段）
 
 ```
-產出這個物件的一頁式行銷頁，做完直接 push 到公開 repo。
-簡版分身、公開總覽卡片、管理台帳都不用做 —— 那些由「主題行銷頁」對話統一處理。
+產出這個物件的一頁式行銷頁，做完 push 到「原稿庫」repo。
+成品頁、簡版分身、公開總覽、管理台帳都不用做 ——
+那些由「主題行銷頁」對話從原稿建置。
+
+【原稿庫位置】
+GitHub：mac2good909777-commits/properties-src（public）
+本機：  C:\Claude\projects\properties-src
+沒有的話先 clone：
+  git clone https://github.com/mac2good909777-commits/properties-src C:\Claude\projects\properties-src
 
 【案名與代號】
 案名：[中文案名]
@@ -18,72 +34,92 @@ PropCode：[英文目錄代號]
 類型：[售／租／買方需求／顧問提案]
 
 【產出規格】
+- 檔案位置：properties-src\<PropCode>\index.html
 - 單一自足的 index.html，照片一律 base64 內嵌，不放獨立圖檔
   （單檔要能直接寄送、離線可讀）
 - 外部相依只允許 Google Fonts，其餘一律內嵌
 - 品牌配色瑞禾綠金：--forest:#2B5937 / --gold:#C0A434 / --ink:#26302A
   / --muted:#77806F / --border:#E8E6E1
-- 版型基準參考 C:\Claude\projects\properties\Guanlian766\index.html
+- 版型基準參考 properties-src\Guanlian766\index.html
   hero 滿版 → KPI 數字條 → WHY 區位論證 → WHAT 標的內容 → 規格表
   → 現場相簿燈箱 → 專案窗口 CTA → footer
 - 不露價的案子寫「備索」，不要留空
-- 頁尾不用自己做「認識專案團隊」區塊，收頁時會統一套上
-  （自己做的殘缺版會被整段換掉，白做）
 
 【目錄命名】
 - 一般案：地名英拼＋關鍵數字，例 WangTian5483、Guanlian766、TCIP3464
 - 潛銷案：再加「-」四碼亂碼，例 ct1300-e58a（網址不可被猜到）
-- 不要用結尾 b 或 -b（那是簡版分身保留的）
+- 不要用結尾 b 或 -b（那是成品端簡版分身保留的）
 - 一經上線不改名、不刪除、不搬家（連結已發出去，斷了就是客戶開到 404）
 
-【鐵則】
-- 不得連回根 index.html，也不得連回任何索引或管理頁
-- 對外導流只允許這四個：
-  reihe-industrial（關於瑞禾）、about-mac（關於現傑）、
-  about（睦聚現傑，不要用 mac-chang-hub）、service-demo（購廠分析）
+【不要做的】
+- 不要做頁尾「認識專案團隊」區塊 —— 建置時統一套上，自己做的會被整段換掉
+- 不要做簡版分身、不要改公開總覽、不要動 properties repo
+- 不要連回任何索引或管理頁
+
+【對外導流只允許這四個】
+關於瑞禾  reihe-industrial.github.io/web/
+關於現傑  mac2good909777-commits.github.io/about-mac/
+睦聚現傑  mac2good909777-commits.github.io/about/   ← 不要用 mac-chang-hub
+購廠分析  mac2good909777-commits.github.io/service-demo/
 
 【部署】
-cd C:\Claude\projects\properties
-git pull --rebase origin main   ← 一定先 pull，兩台機器都會動這個 repo
+cd C:\Claude\projects\properties-src
+git pull --rebase origin main
 git add -A
-git commit -m "新增 [案名]（[PropCode]）一頁式物件頁"
+git commit -m "新增/更新 [案名]（[PropCode]）"
 git push origin main
-推完 curl 確認回 200。然後到「主題行銷頁」對話說一聲「收頁」即可。
+
+推完到「主題行銷頁」對話說一聲「更新 [PropCode]」即可，其餘不用管。
 ```
 
 ---
 
-## B. 收頁（在「主題行銷頁」對話執行）
+## B 段　建置（在「主題行銷頁」對話執行）
+
+**檢查 A 有哪些異動尚未反映到 B：**
 
 ```bash
-cd C:/Claude/projects/properties && git pull --rebase origin main && python C:/Claude/projects/properties-admin/collect.py
+cd C:/Claude/projects/properties-src && git pull --rebase origin main && python C:/Claude/projects/properties-admin/build.py
 ```
 
-先乾跑看有哪些不合規，再實際套用：
+會列出四種狀況：`尚未建置`／`A 已異動，需重建`／`原稿不存在於 A`／`A 有新案，cases.json 尚未登錄`。
+
+**重建：**
 
 ```bash
-cd C:/Claude/projects/properties && python C:/Claude/projects/properties-admin/collect.py --fix
+cd C:/Claude/projects/properties && python C:/Claude/projects/properties-admin/build.py --build
 ```
 
-`collect.py` 會自動完成：
+只重建指定案：`--build Industrial21 TCIP2098`
 
-1. 掃出缺完整版四卡或缺簡版分身的目錄
-2. 主版套上「認識專案團隊」完整版四卡（自帶 style、`kya-` 前綴、零 CSS 相依，插在 `<footer>` 前）
-3. 產出簡版分身 `<PropCode>b`（亂碼後綴目錄用 `-b`），只留 關於瑞禾＋關於現傑
-4. 簡版加 `noindex,nofollow`，避免與主版重複內容
-5. 各 session 自己做的殘缺團隊區塊會被整段移除後換上標準版
+`build.py` 依 `cases.json` 自動完成：
 
-例外清單寫在 `collect.py` 的 `SKIP`：顧問頁、已結案、以及使用原生 `.more-card` 實作的 `WangTian5483(+b)`。
+1. 讀 A 的原稿，移除任何自帶的團隊區塊
+2. `team:full` → 主版插入完整版四卡；`team:none` → 不插（顧問頁、已結案）
+3. `brief:true` → 產簡版分身 `<PropCode>b`（亂碼後綴目錄用 `-b`），兩卡＋`noindex`
+4. `noindex_main:true` → 主版也加 `noindex`
+5. `on_index:true` → 收進公開總覽 `properties/index.html`（**整份自動重生**，不要手改）
+6. 記錄原稿 `sha256` 到 `manifest.json`，供下次比對
 
-收完再手動處理兩件事：
+**推送：**
 
-- **公開總覽**：在售／在租案在 `properties\index.html` 補一張 `<a class="card">`，
-  文案格式「分區・一句話賣點｜規模｜交流道距離」。潛銷、已結案、顧問頁、簡版分身都不補。
-- **台帳**：`properties-admin\index.html` 補列，完整版與簡版各一列。
+```bash
+cd C:/Claude/projects/properties && git add -A && git commit -m "重建 [案名]" && git push origin main
+```
 
 ---
 
-## C. 版本用途
+## C 段　新案要做的兩件事
+
+1. 在 `cases.json` 的 `cases` 補一筆（`code` / `name` / `loc` / `kind` / `status` /
+   `team` / `brief` / `on_index` / `noindex_main` / `price` / `type` / `spec` / `card` / `note`）
+2. 在管理台帳 `properties-admin/index.html` 補列，完整版與簡版各一列
+
+沒登錄 `cases.json` 的案子，`build.py` 檢查時會報「A 有新案，cases.json 尚未登錄」，不會漏掉。
+
+---
+
+## 版本用途
 
 | 版本 | 卡片 | 目錄 | 用途 |
 |---|---|---|---|
