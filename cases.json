@@ -29,7 +29,7 @@
     {
       "code": "Guanlian766",
       "name": "關連三照合法美廠房",
-      "loc": "梧棲區向上路九段 321 巷 26 號・台中港關連工業區",
+      "loc": "臺中市梧棲區・台中港關連工業區",
       "kind": "sale", "status": "live",
       "team": "full", "brief": true, "noindex_main": true,
       "price": "2.83 億",
@@ -62,18 +62,18 @@
     {
       "code": "Industrial21",
       "name": "工業區 21 路帶照案",
-      "loc": "臺中市南屯區工業區二十一路・文山段 227 地號",
+      "loc": "臺中市南屯區・台中工業區內",
       "kind": "sale", "status": "live",
       "team": "full", "brief": true, "noindex_main": true,
       "price": "備索",
       "type": "售<br><b>帶建照素地</b>",
       "spec": "土地 <b>701.49 坪</b>（2,319 ㎡）乙種工業區<br>建照核准總樓地板 2,086 坪・SC 5F+B1<br>臨 10 米路・面寬 34.4m・交流道 1.7 KM",
-      "note": "屋主 進欣昱企業・建照 114 中都建字第 00151 號"
+      "note": ""
     },
     {
       "code": "TCIP2098",
       "name": "台中工業區 2098",
-      "loc": "臺中市西屯區・台中工業區內・協和段 228 地號",
+      "loc": "臺中市西屯區・台中工業區內",
       "kind": "buyer", "status": "live",
       "team": "full", "brief": true, "noindex_main": true,
       "price": "備索",
@@ -92,7 +92,7 @@
     {
       "code": "HotaChiayi3",
       "name": "大埔美 8881",
-      "loc": "嘉義縣大林鎮大埔美園區三路・國 3 梅山交流道 3 分鐘",
+      "loc": "嘉義縣大林鎮・大埔美精密機械園區",
       "kind": "sale", "status": "done",
       "team": "none", "brief": false, "noindex_main": true,
       "price": "備索",
@@ -102,8 +102,8 @@
     },
     {
       "code": "TCIP38-parking",
-      "name": "工業區二十路 38 號　前院停車配置建議",
-      "loc": "台中市南屯區文山段 194、194-1、193-1 地號",
+      "name": "工業區二十路案　前院停車配置建議",
+      "loc": "臺中市南屯區・台中工業區內",
       "kind": "advisory", "status": "other",
       "team": "none", "brief": false, "noindex_main": true,
       "price": "&mdash;",
