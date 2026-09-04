@@ -32,7 +32,8 @@ CSS = """<style>
 /* ===== 統一 HERO／KPI／FOOTER（由 layout.py 產生，勿手改） ===== */
 .uh{position:relative;min-height:74vh;display:flex;align-items:flex-end;
   background-size:cover;background-position:center;color:#fff}
-.uh-txt{background:linear-gradient(150deg,#1B3A24 0%,#2B5937 58%,#22462C 100%)}
+.uh-txt{min-height:0;background:linear-gradient(150deg,#1B3A24 0%,#2B5937 58%,#22462C 100%)}
+.uh-txt .uh-in{padding:70px 24px 66px;align-items:center}
 .uh-in{max-width:1120px;margin:0 auto;padding:56px 24px 60px;width:100%;
   display:flex;align-items:flex-end;gap:34px;flex-wrap:wrap}
 .uh-logo{background:#fff;border-radius:6px;padding:16px 18px;flex:0 0 auto;
