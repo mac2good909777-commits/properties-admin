@@ -24,9 +24,9 @@ C  properties-admin  private，不開 Pages  build.py + cases.json + manifest.js
 
 【原稿庫位置】
 GitHub：mac2good909777-commits/properties-src（public）
-本機：  C:\Claude\projects\properties-src
+本機：  C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src
 沒有的話先 clone：
-  git clone https://github.com/mac2good909777-commits/properties-src C:\Claude\projects\properties-src
+  git clone https://github.com/mac2good909777-commits/properties-src C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src
 
 【案名與代號】
 案名：[中文案名]
@@ -63,7 +63,7 @@ PropCode：[英文目錄代號]
 購廠分析  mac2good909777-commits.github.io/service-demo/
 
 【部署】
-cd C:\Claude\projects\properties-src
+cd C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src
 git pull --rebase origin main
 git add -A
 git commit -m "新增/更新 [案名]（[PropCode]）"
@@ -79,7 +79,7 @@ git push origin main
 **檢查 A 有哪些異動尚未反映到 B：**
 
 ```bash
-cd C:/Claude/projects/properties-src && git pull --rebase origin main && python C:/Claude/projects/properties-admin/build.py
+cd C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-src && git pull --rebase origin main && python C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin/build.py
 ```
 
 會列出四種狀況：`尚未建置`／`A 已異動，需重建`／`原稿不存在於 A`／`A 有新案，cases.json 尚未登錄`。
@@ -87,7 +87,7 @@ cd C:/Claude/projects/properties-src && git pull --rebase origin main && python 
 **重建：**
 
 ```bash
-cd C:/Claude/projects/properties && python C:/Claude/projects/properties-admin/build.py --build
+cd C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties && python C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin/build.py --build
 ```
 
 只重建指定案：`--build Industrial21 TCIP2098`
@@ -104,7 +104,7 @@ cd C:/Claude/projects/properties && python C:/Claude/projects/properties-admin/b
 **推送：**
 
 ```bash
-cd C:/Claude/projects/properties && git add -A && git commit -m "重建 [案名]" && git push origin main
+cd C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties && git add -A && git commit -m "重建 [案名]" && git push origin main
 ```
 
 ---

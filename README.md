@@ -10,8 +10,8 @@
 ## 兩台機器同步
 
 ```
-git -C C:/Claude/projects/properties-admin pull
-git -C C:/Claude/projects/properties-admin add -A
-git -C C:/Claude/projects/properties-admin commit -m "更新台帳"
-git -C C:/Claude/projects/properties-admin push
+git -C C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin pull
+git -C C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin add -A
+git -C C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin commit -m "更新台帳"
+git -C C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin push
 ```

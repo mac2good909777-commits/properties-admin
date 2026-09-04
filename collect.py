@@ -15,7 +15,7 @@
 """
 import io, os, re, sys
 
-REPO = r"C:\Claude\projects\properties"
+REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties"
 
 # 不套用本規則的目錄
 SKIP = {

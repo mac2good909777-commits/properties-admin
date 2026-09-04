@@ -26,8 +26,8 @@ build.py　—— 由原稿 A 產生成品 B
 import hashlib, io, json, os, re, sys
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
-SRC   = r"C:\Claude\projects\properties-src"
-DST   = r"C:\Claude\projects\properties"
+SRC   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src"
+DST   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties"
 MANIFEST = os.path.join(ADMIN, "manifest.json")
 
 # ---------------------------------------------------------------- 團隊區塊
