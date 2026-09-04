@@ -3,475 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>物件頁管理台帳（私人）</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<title>瑞禾物件頁台帳</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap">
 <style>
-:root{--forest:#2B5937;--gold:#C0A434;--ink:#22301F;--muted:#77806F;--border:#E3E1DA;--bg:#FAF9F6;
---on:#2E7D32;--warm:#B26A00;--off:#8A8A8A;--red:#B3261E}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#2C332C;
-line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1240px;margin:0 auto;padding:38px 26px 80px}
-header{border-bottom:2px solid var(--forest);padding-bottom:16px;margin-bottom:8px}
-.eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);font-weight:700}
-h1{font-size:25px;font-weight:900;color:var(--ink);letter-spacing:1.5px;margin:6px 0 4px}
-.sub{font-size:13px;color:var(--muted)}
-code{font-family:ui-monospace,Consolas,monospace;background:#F3F2EC;padding:1.5px 6px;
-border-radius:3px;font-size:12px;color:var(--forest)}
-.warn{margin:18px 0 26px;background:#FFF6E5;border-left:4px solid var(--gold);padding:12px 16px;
-font-size:13px;color:#6B5514;border-radius:0 3px 3px 0;line-height:1.75}
-.warn b{color:#8A6D00}
-.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
-.chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:5px 14px;font-size:12.5px;
-color:var(--muted);cursor:pointer;transition:.15s;font-family:inherit}
-.chip:hover{border-color:var(--gold);color:var(--ink)}
-.chip.on{background:var(--forest);border-color:var(--forest);color:#fff;font-weight:700}
-.count{margin-left:auto;font-size:12px;color:var(--muted)}
-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);
-border-radius:4px;overflow:hidden;font-size:13.5px}
-thead th{background:var(--forest);color:#fff;font-weight:700;font-size:12px;letter-spacing:1px;
-padding:11px 10px;text-align:left;white-space:nowrap}
-tbody td{padding:12px 10px;border-top:1px solid #F0EEE8;vertical-align:top}
-tbody tr:hover{background:#FCFBF7}
-tbody tr.archived{opacity:.58}
-.nm{font-weight:900;color:var(--ink);font-size:14.5px;letter-spacing:.5px}
-.dir{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:var(--muted);margin-top:2px}
-.loc{font-size:12.5px;color:var(--muted);margin-top:3px}
-.spec{font-size:12.5px;line-height:1.55}
-.spec b{color:var(--ink);font-weight:700}
-.price{font-weight:900;color:var(--forest);white-space:nowrap}
-.price.ask{font-weight:500;color:var(--muted);font-size:12.5px}
-.st{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:3px;white-space:nowrap}
-.st-on{background:#E7F2E8;color:var(--on)}
-.st-warm{background:#FBF0DF;color:var(--warm)}
-.st-off{background:#EFEFEF;color:var(--off)}
-.dot{font-size:15px;line-height:1}
-.yes{color:var(--on)}.no{color:#CFCFCF}.bad{color:var(--red);font-weight:900}
-.d{font-size:12px;color:var(--muted);white-space:nowrap}
-.d b{color:var(--ink);font-weight:700}
-.go{display:inline-block;background:var(--forest);color:#fff;text-decoration:none;font-size:11.5px;
-font-weight:700;padding:5px 11px;border-radius:3px;white-space:nowrap}
-.go:hover{background:var(--gold)}
-.go2{display:block;margin-top:5px;font-size:11px;color:var(--muted);text-decoration:none}
-.go2:hover{color:var(--gold)}
-.note{font-size:11.5px;color:var(--warm);margin-top:6px;line-height:1.45}
-h2{font-size:15px;font-weight:900;color:var(--ink);letter-spacing:1px;margin:38px 0 12px;
-padding-left:10px;border-left:3px solid var(--gold)}
-h2.todo{border-left-color:var(--red)}
-.panel{background:#fff;border:1px solid var(--border);border-radius:4px;padding:20px 22px;font-size:13px;line-height:1.85}
-.panel ol,.panel ul{margin:6px 0 0 20px}
-.panel li{margin-bottom:5px}
-.lbl{display:block;margin:16px 0 6px;color:var(--ink);font-weight:900}
-.tree{font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.75;color:#4A5248;
-background:#F7F6F1;padding:16px 18px;border-radius:3px;white-space:pre;overflow-x:auto}
-ul.todolist li{color:#7A2E28}
-footer{margin-top:44px;font-size:11.5px;color:#AAA;letter-spacing:1px;text-align:center}
-@media(max-width:900px){.wrap{padding:24px 14px 60px}table{font-size:12.5px}
-thead th:nth-child(4),tbody td:nth-child(4),thead th:nth-child(7),tbody td:nth-child(7){display:none}}
+:root{
+  --paper:#F7F6F1; --surface:#FFFFFF; --sunk:#EFEDE4;
+  --ink:#1E2620; --body:#3C463C; --dim:#77806F;
+  --line:#E1DFD4; --line-soft:#EDEBE2;
+  --forest:#2B5937; --gold:#A8891F; --gold-bright:#C0A434;
+  --live:#2F6B3C; --live-bg:#E6F0E7;
+  --warm:#8A6A12; --warm-bg:#F5EDD8;
+  --off:#7C8279; --off-bg:#E9E8E1;
+  --shadow:0 1px 2px rgba(30,38,32,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#12170F; --surface:#1A2018; --sunk:#232A20;
+    --ink:#EDEFE6; --body:#C3C9BC; --dim:#8B9384;
+    --line:#2E3629; --line-soft:#242B20;
+    --forest:#8CBF97; --gold:#D8BC55; --gold-bright:#E3CC72;
+    --live:#8CC79A; --live-bg:#1E2E22;
+    --warm:#D9B457; --warm-bg:#302818;
+    --off:#8B9384; --off-bg:#242B20;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12170F; --surface:#1A2018; --sunk:#232A20;
+  --ink:#EDEFE6; --body:#C3C9BC; --dim:#8B9384;
+  --line:#2E3629; --line-soft:#242B20;
+  --forest:#8CBF97; --gold:#D8BC55; --gold-bright:#E3CC72;
+  --live:#8CC79A; --live-bg:#1E2E22;
+  --warm:#D9B457; --warm-bg:#302818;
+  --off:#8B9384; --off-bg:#242B20;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--body);
+  font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-size:15px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace}
+.wrap{max-width:1180px; margin:0 auto; padding:44px 22px 96px}
+
+/* ---------- 標頭 ---------- */
+header{
+  display:flex; flex-wrap:wrap; align-items:flex-end; gap:20px;
+  padding-bottom:20px; border-bottom:2px solid var(--forest); margin-bottom:26px;
+}
+.brand{flex:1 1 320px; min-width:0}
+.eyebrow{
+  font-size:11px; letter-spacing:.32em; color:var(--gold);
+  font-weight:700; text-transform:uppercase; margin-bottom:8px;
+}
+h1{
+  font-family:"Noto Serif TC",serif; font-weight:900;
+  font-size:clamp(25px,3.4vw,34px); line-height:1.2; letter-spacing:.04em;
+  color:var(--ink); margin:0; text-wrap:balance;
+}
+.sub{margin-top:8px; font-size:13px; color:var(--dim)}
+.sub .mono{color:var(--forest); font-weight:500}
+
+/* ---------- 摘要 ---------- */
+.tally{display:flex; flex-wrap:wrap; gap:0; margin-bottom:30px}
+.tally div{
+  padding:0 22px 0 0; margin-right:22px; border-right:1px solid var(--line);
+}
+.tally div:last-child{border-right:0; margin-right:0; padding-right:0}
+.tally b{
+  display:block; font-family:"Noto Serif TC",serif; font-weight:900;
+  font-size:26px; line-height:1.15; color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.tally span{font-size:12px; color:var(--dim); letter-spacing:.06em}
+
+/* ---------- 篩選 ---------- */
+.bar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px}
+.chip{
+  font:inherit; font-size:13px; padding:5px 15px; cursor:pointer;
+  background:var(--surface); color:var(--dim);
+  border:1px solid var(--line); border-radius:100px; transition:.15s;
+}
+.chip:hover{color:var(--ink); border-color:var(--gold)}
+.chip[aria-pressed="true"]{background:var(--forest); border-color:var(--forest); color:var(--paper); font-weight:700}
+:root[data-theme="dark"] .chip[aria-pressed="true"],
+@media (prefers-color-scheme: dark){}
+.chip:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px}
+.shown{margin-left:auto; font-size:12px; color:var(--dim)}
+
+/* ---------- 表 ---------- */
+.scroll{overflow-x:auto; border:1px solid var(--line); border-radius:4px; background:var(--surface)}
+table{width:100%; border-collapse:collapse; min-width:940px}
+thead th{
+  position:sticky; top:0; z-index:1;
+  background:var(--forest); color:#F2F4EE;
+  font-size:11px; font-weight:700; letter-spacing:.14em;
+  text-align:left; padding:11px 14px; white-space:nowrap;
+}
+:root[data-theme="dark"] thead th{color:#101610}
+tbody td{padding:15px 14px; border-top:1px solid var(--line-soft); vertical-align:top}
+tbody tr:hover{background:var(--sunk)}
+tbody tr.past td{opacity:.6}
+
+.case{font-family:"Noto Serif TC",serif; font-weight:700; font-size:16px; color:var(--ink); letter-spacing:.02em}
+.code{font-size:11.5px; color:var(--dim); margin-top:3px}
+.where{font-size:12px; color:var(--dim); margin-top:5px; max-width:26ch}
+.kind{font-size:12.5px; white-space:nowrap}
+.kind b{color:var(--ink)}
+.spec{font-size:12.5px; line-height:1.6; max-width:34ch}
+.spec b{color:var(--ink); font-weight:700}
+.ask{font-family:"Noto Serif TC",serif; font-weight:700; font-size:17px; color:var(--forest); white-space:nowrap; font-variant-numeric:tabular-nums}
+.ask.q{font-family:inherit; font-size:13px; font-weight:400; color:var(--dim)}
+.date{font-size:12.5px; color:var(--dim); white-space:nowrap; font-variant-numeric:tabular-nums}
+.date b{display:block; color:var(--ink); font-size:13.5px; font-weight:700}
+
+.tag{display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:3px; white-space:nowrap; letter-spacing:.04em}
+.t-live{background:var(--live-bg); color:var(--live)}
+.t-warm{background:var(--warm-bg); color:var(--warm)}
+.t-off{background:var(--off-bg); color:var(--off)}
+.listed{font-size:11.5px; color:var(--dim); margin-top:7px; white-space:nowrap}
+
+.links{display:flex; flex-direction:column; gap:6px}
+.go{
+  display:inline-flex; align-items:baseline; gap:7px; text-decoration:none;
+  font-size:12px; font-weight:700; padding:6px 12px; border-radius:3px;
+  border:1px solid transparent; white-space:nowrap; transition:.15s;
+}
+.go .n{font-size:10px; letter-spacing:.1em; opacity:.75; font-weight:400}
+.go-full{background:var(--forest); color:#F2F4EE}
+:root[data-theme="dark"] .go-full{color:#101610}
+.go-full:hover{background:var(--gold); color:#1A1405}
+.go-brief{background:transparent; color:var(--forest); border-color:var(--line)}
+.go-brief:hover{border-color:var(--gold); color:var(--gold)}
+.go:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px}
+.nolink{font-size:11.5px; color:var(--dim); padding:6px 0}
+.memo{font-size:11.5px; color:var(--warm); margin-top:8px; max-width:28ch; line-height:1.5}
+
+/* ---------- 說明 ---------- */
+h2{
+  font-family:"Noto Serif TC",serif; font-weight:700; font-size:17px;
+  color:var(--ink); letter-spacing:.05em; margin:46px 0 14px;
+  padding-left:11px; border-left:3px solid var(--gold);
+}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:22px 24px; font-size:13.5px; box-shadow:var(--shadow)}
+.panel p{margin:0 0 12px}
+.panel p:last-child{margin-bottom:0}
+.panel ul,.panel ol{margin:8px 0 0; padding-left:20px}
+.panel li{margin-bottom:6px}
+.panel li:last-child{margin-bottom:0}
+kbd,.k{
+  font-family:ui-monospace,Consolas,monospace; font-size:12px;
+  background:var(--sunk); color:var(--forest); padding:2px 6px; border-radius:3px;
+}
+.flow{
+  font-family:ui-monospace,Consolas,monospace; font-size:12px; line-height:1.8;
+  color:var(--body); background:var(--sunk); border-radius:3px;
+  padding:16px 18px; overflow-x:auto; white-space:pre; margin:0 0 16px;
+}
+.lbl{display:block; font-weight:700; color:var(--ink); margin:18px 0 4px; font-size:13px; letter-spacing:.04em}
+.two{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px}
+.vcard{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:20px 22px; box-shadow:var(--shadow)}
+.vcard h3{font-family:"Noto Serif TC",serif; font-size:15px; color:var(--ink); margin:0 0 4px; font-weight:700}
+.vcard .who{font-size:11px; letter-spacing:.16em; color:var(--gold); font-weight:700; margin-bottom:9px}
+.vcard p{font-size:13px; color:var(--body); margin:0 0 10px}
+.vcard ul{margin:0; padding-left:18px; font-size:12.5px; color:var(--dim)}
+
+footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line); font-size:11.5px; color:var(--dim); letter-spacing:.06em}
+
+@media(max-width:640px){
+  .wrap{padding:28px 14px 64px}
+  .tally div{padding-right:16px; margin-right:16px}
+  .tally b{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important}}
 </style>
 </head>
 <body>
+
+
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">PRIVATE ADMIN &middot; INTERNAL ONLY</div>
-  <h1>物件一頁式　管理台帳</h1>
-  <div class="sub">repo <code>mac2good909777-commits/properties</code>　&middot;　private repo · 不啟用 Pages · 不對外</div>
+  <div class="brand">
+    <div class="eyebrow">Property Pages · Internal Ledger</div>
+    <h1>物件一頁式　管理台帳</h1>
+    <div class="sub">瑞禾開發／睦聚　·　成品站 <span class="mono">mac2good909777-commits/properties</span></div>
+  </div>
 </header>
 
-<div class="warn">
-  <b>存放位置：</b>本台帳自成一個 <b>private repo</b>
-  <code>mac2good909777-commits/properties-admin</code>，與公開的
-  <code>properties</code> repo 完全分離。<br>
-  <b>原因：</b><code>properties</code> 為 <b>public</b>，任何人都能瀏覽其原始碼與目錄清單；
-  台帳一旦放進去，潛銷案與未公開物件即等同公開。private repo 只有登入本帳號才看得到，
-  且不啟用 Pages，網路上無任何可存取的網址。<br>
-  <b>各物件分頁一律不得連回本頁</b> —— 現況已確認：7 頁皆無回連。
+<div class="tally">
+  <div><b class="num">8</b><span>案件</span></div>
+  <div><b class="num">14</b><span>頁面上線</span></div>
+  <div><b class="num">6</b><span>在售／在租</span></div>
+  <div><b class="num">6</b><span>完整版＋簡版</span></div>
+  <div><b>全站</b><span>noindex 不進搜尋</span></div>
 </div>
 
 <div class="bar">
-  <button class="chip on" data-f="all">全部</button>
-  <button class="chip" data-f="live">在售／在租</button>
-  <button class="chip" data-f="quiet">潛銷</button>
-  <button class="chip" data-f="other">顧問頁</button>
-  <button class="chip" data-f="done">已結案</button>
-  <span class="count" id="cnt"></span>
+  <button class="chip" aria-pressed="true" data-f="all">全部</button>
+  <button class="chip" aria-pressed="false" data-f="live">在售／在租</button>
+  <button class="chip" aria-pressed="false" data-f="done">已結案</button>
+  <button class="chip" aria-pressed="false" data-f="advisory">顧問頁</button>
+  <span class="shown" id="shown"></span>
 </div>
 
+<div class="scroll">
 <table>
-<thead><tr>
-  <th>物件</th><th>類型</th><th>規模</th><th>開價</th><th>上架／更新</th>
-  <th>狀態</th><th style="text-align:center">總覽</th><th style="text-align:center">noindex</th><th>頁面</th>
-</tr></thead>
-<tbody>
+  <thead>
+    <tr>
+      <th scope="col">案件</th>
+      <th scope="col">性質</th>
+      <th scope="col">規模</th>
+      <th scope="col">開價</th>
+      <th scope="col">上架</th>
+      <th scope="col">狀態</th>
+      <th scope="col">頁面</th>
+    </tr>
+  </thead>
+  <tbody>
 
-<tr data-s="live">
-  <td><div class="nm">王田 5483</div><div class="dir">WangTian5483</div>
-      <div class="loc">臺中市大肚區・正沙田路</div></td>
-  <td class="spec">售<br><b>土地・整廠</b></td>
-  <td class="spec"><b>5,483 坪</b>　乙種工業區<br>臨路面寬 110 米・正 30 米沙田路<br>王田交流道 2.3 KM</td>
-  <td class="price ask">備索</td>
-  <td class="d"><b>08/23</b><br>更新 08/26</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot yes">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/WangTian5483/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/WangTian5483/index.html" target="_blank">本機檔</a></td>
-</tr>
+  <tr data-s="live">
+    <td>
+      <div class="case">王田 5483</div>
+      <div class="code mono">WangTian5483</div>
+      <div class="where">臺中市大肚區・正沙田路</div>
+    </td>
+    <td class="kind">售<br><b>土地・整廠</b><br>乙種工業區</td>
+    <td class="spec"><b>5,483 坪</b><br>臨路面寬 110 米・正 30 米沙田路<br>王田交流道 2.3 KM</td>
+    <td class="ask q">備索</td>
+    <td class="date"><b>08/23</b>更新 08/26</td>
+    <td>
+      <span class="tag t-live">在售</span>
+      <div class="listed">已掛公開總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-full" href="https://mac2good909777-commits.github.io/properties/WangTian5483/" target="_blank" rel="noopener">完整版 <span class="n">四卡</span></a>
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/WangTian5483b/" target="_blank" rel="noopener">簡版 <span class="n">兩卡</span></a>
+      </div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">王田 5483　<span style="color:var(--gold)">b 版</span></div><div class="dir">WangTian5483b</div>
-      <div class="loc">同上・分身頁</div></td>
-  <td class="spec">售<br><b>土地・整廠</b></td>
-  <td class="spec">內容同 WangTian5483<br><b>差異：</b>移除頁尾「睦聚現傑／購廠分析」兩張導流卡</td>
-  <td class="price ask">備索</td>
-  <td class="d"><b>08/23</b><br>更新 08/26</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/WangTian5483b/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/WangTian5483b/index.html" target="_blank">本機檔</a>
-      <div class="note">給不宜導流的對象（同業／屋主）用</div></td>
-</tr>
+  <tr data-s="live">
+    <td>
+      <div class="case">關連三照合法美廠房</div>
+      <div class="code mono">Guanlian766</div>
+      <div class="where">梧棲區向上路九段 321 巷 26 號・台中港關連工業區</div>
+    </td>
+    <td class="kind">售　<b>專任委託</b><br>特種工業區</td>
+    <td class="spec">建物 <b>766 坪</b>（1F 503＋2F 257）<br>土地 786.5 坪・21.6 × 115.8 m<br>鋼骨造 SC・屋齡 5.9 年・三照齊備</td>
+    <td class="ask">2.83 億</td>
+    <td class="date"><b>08/27</b>更新 08/27</td>
+    <td>
+      <span class="tag t-live">在售</span>
+      <div class="listed">已掛公開總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-full" href="https://mac2good909777-commits.github.io/properties/Guanlian766/" target="_blank" rel="noopener">完整版 <span class="n">四卡</span></a>
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/Guanlian766b/" target="_blank" rel="noopener">簡版 <span class="n">兩卡</span></a>
+      </div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">關連三照合法美廠房</div><div class="dir">Guanlian766</div>
-      <div class="loc">梧棲區向上路九段 321 巷 26 號・台中港關連工業區</div></td>
-  <td class="spec">售　<b>專任委託</b><br>特種工業區</td>
-  <td class="spec">建物 <b>766 坪</b>（1F 503＋2F 257）<br>土地 786.5 坪（3 筆）21.6m &times; 115.8m<br>鋼骨造 SC・屋齡 5.9 年・三照齊備</td>
-  <td class="price">2.83 億</td>
-  <td class="d"><b>08/27</b><br>更新 08/27</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot yes">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/Guanlian766/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/Guanlian766/index.html" target="_blank">本機檔</a></td>
-</tr>
+  <tr data-s="live">
+    <td>
+      <div class="case">台中工業區 樓層式廠辦</div>
+      <div class="code mono">TCIP3464</div>
+      <div class="where">台中工業區・國道 1 號台中交流道 3 KM</div>
+    </td>
+    <td class="kind"><b>招租</b><br>乙種工業區</td>
+    <td class="spec">招租總面積 <b>3,464 坪</b><br>樓高 5 米・臨路 18 米<br>卸貨碼頭＋2 噸貨梯・整層可租</td>
+    <td class="ask q">洽詢</td>
+    <td class="date"><b>08/25</b>更新 08/26</td>
+    <td>
+      <span class="tag t-live">在租</span>
+      <div class="listed">已掛公開總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-full" href="https://mac2good909777-commits.github.io/properties/TCIP3464/" target="_blank" rel="noopener">完整版 <span class="n">四卡</span></a>
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/TCIP3464b/" target="_blank" rel="noopener">簡版 <span class="n">兩卡</span></a>
+      </div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">台中工業區 樓層式廠辦</div><div class="dir">TCIP3464</div>
-      <div class="loc">台中工業區・國道 1 號台中交流道 3 KM</div></td>
-  <td class="spec"><b>招租</b><br>乙種工業區</td>
-  <td class="spec">招租總面積 <b>3,464 坪</b><br>樓高 5 米・臨路 18 米<br>卸貨碼頭＋2 噸貨梯・整層可租</td>
-  <td class="price ask">洽詢</td>
-  <td class="d"><b>08/25</b><br>更新 08/26</td>
-  <td><span class="st st-on">在租</span></td>
-  <td style="text-align:center"><span class="dot yes">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/TCIP3464/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/TCIP3464/index.html" target="_blank">本機檔</a></td>
-</tr>
+  <tr data-s="live">
+    <td>
+      <div class="case">中台樓層式 1300</div>
+      <div class="code mono">ct1300-e58a</div>
+      <div class="where">台中都會區・經濟部編定大型工業區內</div>
+    </td>
+    <td class="kind">售<br>乙種工業區</td>
+    <td class="spec">土地約 <b>1,000 坪</b>／建物約 <b>1,300 坪</b>級<br>4 層・1F 挑高 5 米・55 × 65 m<br>三照齊全・單一法人產權</td>
+    <td class="ask q">備索</td>
+    <td class="date"><b>08/25</b>更新 09/04</td>
+    <td>
+      <span class="tag t-live">在售</span>
+      <div class="listed">已掛公開總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-full" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a/" target="_blank" rel="noopener">完整版 <span class="n">四卡</span></a>
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a-b/" target="_blank" rel="noopener">簡版 <span class="n">兩卡</span></a>
+      </div>
+      <div class="memo">原為潛銷案，09/04 轉對外。目錄名保留亂碼後綴，不改名。</div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">關連三照合法美廠房　<span style="color:var(--gold)">簡版</span></div><div class="dir">Guanlian766b</div>
-      <div class="loc">Guanlian766 的簡版分身</div></td>
-  <td class="spec">同主版</td>
-  <td class="spec">內容同 <code>Guanlian766</code><br><b>差異：</b>認識專案團隊僅留 關於瑞禾＋關於現傑</td>
-  <td class="price ask">同主版</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/Guanlian766b/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/Guanlian766b/index.html" target="_blank">本機檔</a>
-      <div class="note">一般散發／同業／屋主用</div></td>
-</tr>
+  <tr data-s="live">
+    <td>
+      <div class="case">工業區 21 路帶照案</div>
+      <div class="code mono">Industrial21</div>
+      <div class="where">臺中市南屯區工業區二十一路・文山段 227 地號</div>
+    </td>
+    <td class="kind">售<br><b>帶建照素地</b><br>乙種工業區</td>
+    <td class="spec">土地 <b>701.49 坪</b>（2,319 ㎡）<br>建照核准總樓地板 2,086 坪・SC 5F+B1<br>臨 10 米路・面寬 34.4 m・交流道 1.7 KM</td>
+    <td class="ask q">備索</td>
+    <td class="date"><b>09/04</b>更新 09/04</td>
+    <td>
+      <span class="tag t-live">在售</span>
+      <div class="listed">已掛公開總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-full" href="https://mac2good909777-commits.github.io/properties/Industrial21/" target="_blank" rel="noopener">完整版 <span class="n">四卡</span></a>
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/Industrial21b/" target="_blank" rel="noopener">簡版 <span class="n">兩卡</span></a>
+      </div>
+      <div class="memo">屋主 進欣昱企業・建照 114 中都建字第 00151 號</div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">台中工業區 樓層式廠辦　<span style="color:var(--gold)">簡版</span></div><div class="dir">TCIP3464b</div>
-      <div class="loc">TCIP3464 的簡版分身</div></td>
-  <td class="spec">同主版</td>
-  <td class="spec">內容同 <code>TCIP3464</code><br><b>差異：</b>認識專案團隊僅留 關於瑞禾＋關於現傑</td>
-  <td class="price ask">同主版</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/TCIP3464b/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/TCIP3464b/index.html" target="_blank">本機檔</a>
-      <div class="note">一般散發／同業／屋主用</div></td>
-</tr>
+  <tr data-s="live">
+    <td>
+      <div class="case">台中工業區 2098</div>
+      <div class="code mono">TCIP2098</div>
+      <div class="where">臺中市西屯區・台中工業區內・協和段 228 地號</div>
+    </td>
+    <td class="kind"><b>買方一頁式</b><br>素地</td>
+    <td class="spec">基地 <b>2,098 坪</b>　單一地號完整釋出<br>臨 16 米園區道路・路口位置<br>國道 1 號台中交流道約 3 KM</td>
+    <td class="ask q">備索</td>
+    <td class="date"><b>09/04</b>更新 09/04</td>
+    <td>
+      <span class="tag t-live">在售</span>
+      <div class="listed">已掛公開總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-full" href="https://mac2good909777-commits.github.io/properties/TCIP2098/" target="_blank" rel="noopener">完整版 <span class="n">四卡</span></a>
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/TCIP2098b/" target="_blank" rel="noopener">簡版 <span class="n">兩卡</span></a>
+      </div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">中台樓層式 1300　<span style="color:var(--gold)">簡版</span></div><div class="dir">ct1300-e58a-b</div>
-      <div class="loc">ct1300-e58a 的簡版分身</div></td>
-  <td class="spec">同主版</td>
-  <td class="spec">內容同 <code>ct1300-e58a</code><br><b>差異：</b>認識專案團隊僅留 關於瑞禾＋關於現傑</td>
-  <td class="price ask">同主版</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a-b/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/ct1300-e58a-b/index.html" target="_blank">本機檔</a>
-      <div class="note">目錄名例外：主版已含亂碼後綴，簡版接 <code>-b</code></div></td>
-</tr>
+  <tr data-s="done" class="past">
+    <td>
+      <div class="case">大埔美 8881</div>
+      <div class="code mono">HotaChiayi3</div>
+      <div class="where">嘉義縣大林鎮大埔美園區三路・國 3 梅山交流道 3 分鐘</div>
+    </td>
+    <td class="kind">售　<b>整廠</b><br>丁種建築用地</td>
+    <td class="spec">土地 <b>9,127 坪</b>／建物 <b>8,881 坪</b><br>1F 樓高 7 米・2F 載重 1,500 kg/㎡<br>大埔美精密機械園區</td>
+    <td class="ask q">備索</td>
+    <td class="date"><b>08/23</b>更新 08/24</td>
+    <td>
+      <span class="tag t-off">已結案</span>
+      <div class="listed">不掛總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/HotaChiayi3/" target="_blank" rel="noopener">頁面 <span class="n">保留備查</span></a>
+      </div>
+      <div class="memo">一次性物件，不會再上架。路徑不動，避免既發連結失效。素材留在 Drive。</div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">中台樓層式 1300</div><div class="dir">ct1300-e58a</div>
-      <div class="loc">台中都會區・經濟部編定大型工業區內</div></td>
-  <td class="spec">售<br>乙種工業區</td>
-  <td class="spec">土地約 <b>1,000 坪</b>／建物約 <b>1,300 坪</b>級<br>4 層・1F 挑高 5 米・55m &times; 65m<br>三照齊全・單一法人產權</td>
-  <td class="price ask">備索</td>
-  <td class="d"><b>08/25</b><br>更新 08/25</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot yes">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/ct1300-e58a/index.html" target="_blank">本機檔</a>
-      <div class="note">2026-09-04 由潛銷轉對外，已掛公開總覽；目錄名保留亂碼後綴（不改名）</div></td>
-</tr>
+  <tr data-s="advisory">
+    <td>
+      <div class="case">工業區二十路 38 號　前院停車配置</div>
+      <div class="code mono">TCIP38-parking</div>
+      <div class="where">台中市南屯區文山段 194、194-1、193-1 地號</div>
+    </td>
+    <td class="kind"><b>顧問提案</b><br>非銷售物件</td>
+    <td class="spec">前院約 <b>60 × 20 m</b>（≈1,200 ㎡）<br>建議 <b>32 席</b>小客車・合理區間 30–34<br>雙排對停・拆守衛室改車牌辨識</td>
+    <td class="ask q">—</td>
+    <td class="date"><b>08/28</b>更新 08/28</td>
+    <td>
+      <span class="tag t-warm">顧問頁</span>
+      <div class="listed">不掛總覽</div>
+    </td>
+    <td>
+      <div class="links">
+        <a class="go go-brief" href="https://mac2good909777-commits.github.io/properties/TCIP38-parking/" target="_blank" rel="noopener">頁面 <span class="n">配置建議</span></a>
+      </div>
+      <div class="memo">給屋主／客戶看的配置建議，不套團隊區塊、不做簡版。</div>
+    </td>
+  </tr>
 
-<tr data-s="live">
-  <td><div class="nm">工業區 21 路帶照案</div><div class="dir">Industrial21</div><div class="loc">臺中市南屯區工業區二十一路・文山段 227 地號</div></td>
-  <td class="spec">售<br><b>帶建照素地</b></td>
-  <td class="spec">土地 <b>701.49 坪</b>（2,319 ㎡）乙種工業區<br>建照核准總樓地板 2,086 坪・SC 5F+B1<br>臨 10 米路・面寬 34.4m・交流道 1.7 KM</td>
-  <td class="price ask">備索</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot yes">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/Industrial21/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/Industrial21/index.html" target="_blank">本機檔</a>
-      <div class="note">屋主 進欣昱企業・建照 114 中都建字第 00151 號</div></td>
-</tr>
-
-<tr data-s="live">
-  <td><div class="nm">工業區 21 路帶照案　<span style="color:var(--gold)">簡版</span></div><div class="dir">Industrial21b</div><div class="loc">Industrial21 的簡版分身</div></td>
-  <td class="spec">同主版</td>
-  <td class="spec">內容同 <code>Industrial21</code><br><b>差異：</b>認識專案團隊僅留 關於瑞禾＋關於現傑</td>
-  <td class="price ask">同主版</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/Industrial21b/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/Industrial21b/index.html" target="_blank">本機檔</a>
-      <div class="note">一般散發／同業／屋主用</div></td>
-</tr>
-
-<tr data-s="live">
-  <td><div class="nm">台中工業區 2098</div><div class="dir">TCIP2098</div><div class="loc">臺中市西屯區・台中工業區內・協和段 228 地號</div></td>
-  <td class="spec"><b>買方一頁式</b><br>素地</td>
-  <td class="spec">基地 <b>2,098 坪</b>　單一地號完整釋出<br>臨 16 米園區道路・路口位置<br>國道 1 號台中交流道約 3 KM</td>
-  <td class="price ask">備索</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot yes">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/TCIP2098/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/TCIP2098/index.html" target="_blank">本機檔</a></td>
-</tr>
-
-<tr data-s="live">
-  <td><div class="nm">台中工業區 2098　<span style="color:var(--gold)">簡版</span></div><div class="dir">TCIP2098b</div><div class="loc">TCIP2098 的簡版分身</div></td>
-  <td class="spec">同主版</td>
-  <td class="spec">內容同 <code>TCIP2098</code><br><b>差異：</b>認識專案團隊僅留 關於瑞禾＋關於現傑</td>
-  <td class="price ask">同主版</td>
-  <td class="d"><b>09/04</b><br>更新 09/04</td>
-  <td><span class="st st-on">在售</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/TCIP2098b/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/TCIP2098b/index.html" target="_blank">本機檔</a>
-      <div class="note">一般散發／同業／屋主用</div></td>
-</tr>
-
-<tr data-s="other">
-  <td><div class="nm">工業區二十路 38 號　前院停車配置建議</div><div class="dir">TCIP38-parking</div>
-      <div class="loc">台中市南屯區文山段 194、194-1、193-1 地號</div></td>
-  <td class="spec"><b>顧問提案頁</b><br>非銷售物件</td>
-  <td class="spec">前院約 <b>60m &times; 20m</b>（&#8776;1,200 &#13217;）<br>建議 <b>32 席</b>小客車（區間 30&ndash;34）<br>雙排對停・拆守衛室改車牌辨識</td>
-  <td class="price ask">&mdash;</td>
-  <td class="d"><b>08/28</b><br>更新 08/28</td>
-  <td><span class="st st-warm">顧問</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" href="https://mac2good909777-commits.github.io/properties/TCIP38-parking/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/TCIP38-parking/index.html" target="_blank">本機檔</a>
-      <div class="note">給屋主／客戶看的配置建議，非物件銷售頁</div></td>
-</tr>
-
-<tr data-s="done" class="archived">
-  <td><div class="nm">大埔美 8881</div><div class="dir">HotaChiayi3</div>
-      <div class="loc">嘉義縣大林鎮大埔美園區三路・國 3 梅山交流道 3 分鐘</div></td>
-  <td class="spec">售　<b>整廠</b><br>丁種建築用地</td>
-  <td class="spec">土地 <b>9,127 坪</b>／建物 <b>8,881 坪</b><br>1F 樓高 7 米・2F 載重 1,500 kg/&#13217;<br>大埔美精密機械園區</td>
-  <td class="price ask">備索</td>
-  <td class="d"><b>08/23</b><br>更新 08/24</td>
-  <td><span class="st st-off">已結案</span></td>
-  <td style="text-align:center"><span class="dot no">&#9679;</span></td>
-  <td style="text-align:center"><span class="dot yes">&#10003;</span></td>
-  <td><a class="go" style="background:#8A8A8A" href="https://mac2good909777-commits.github.io/properties/HotaChiayi3/" target="_blank">線上 &#8599;</a>
-      <a class="go2" href="file:///C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties/HotaChiayi3/index.html" target="_blank">本機檔</a>
-      <div class="note">一次性物件・不會再上架。頁面與資料保留備查，路徑不動（避免既發連結失效）</div></td>
-</tr>
-
-</tbody>
+  </tbody>
 </table>
+</div>
 
-<h2>A / B / C 三層架構</h2>
+<h2>完整版與簡版</h2>
+<div class="two">
+  <div class="vcard">
+    <div class="who">FULL · 四卡</div>
+    <h3>完整版</h3>
+    <p>頁尾「認識專案團隊」四張卡齊備，導流到全部平台。</p>
+    <ul>
+      <li>COMPANY　關於瑞禾</li>
+      <li>AGENT　關於現傑</li>
+      <li>PLATFORM　睦聚現傑</li>
+      <li>SERVICE　購廠分析</li>
+    </ul>
+    <p style="margin-top:12px"><b style="color:var(--ink)">用途</b>　電子報、已知對象 —— 知道對方是誰、可安心導流。</p>
+  </div>
+  <div class="vcard">
+    <div class="who">BRIEF · 兩卡</div>
+    <h3>簡版　<span class="k">&lt;PropCode&gt;b</span></h3>
+    <p>只留前兩張卡，不導流到睦聚平台與購廠分析。</p>
+    <ul>
+      <li>COMPANY　關於瑞禾</li>
+      <li>AGENT　關於現傑</li>
+    </ul>
+    <p style="margin-top:12px"><b style="color:var(--ink)">用途</b>　一般散發、同業、屋主 —— 不希望對方順著連結摸清底細時用。</p>
+  </div>
+</div>
+
+<h2>三層架構</h2>
 <div class="panel">
-<div class="tree">A  properties-src    public，不開 Pages   原稿。各專案 push 到這裡
+<div class="flow">A  properties-src    public，不開 Pages   原稿。各專案 push 到這裡
         │
-        │  build.py（在 C）依 cases.json 建置
+        │  build.py 依 cases.json 建置
         ▼
-B  properties        public，開 Pages     成品。只有本對話寫入
-                                          https://mac2good909777-commits.github.io/properties/&lt;PropCode&gt;/
+B  properties        public，開 Pages     成品。只有「主題行銷頁」對話寫入
+                                          網址永遠不變
+C  properties-admin  private，不開 Pages  build.py + cases.json + manifest.json + 台帳</div>
 
-C  properties-admin  private，不開 Pages  build.py + cases.json + manifest.json + 本台帳</div>
+<p>各專案只碰 <span class="k">A</span>，改完 push 後到「主題行銷頁」對話說一聲「更新 &lt;PropCode&gt;」。
+比對原稿 <span class="k">sha256</span> 有變就重建 <span class="k">B</span>，成品網址一個都不會動。</p>
 
-各專案只碰 A，B 的網址永遠不變。C 只有本人看得到。
+<span class="lbl">建置指令</span>
+<div class="flow" style="margin-bottom:0">cd .../properties-src &amp;&amp; git pull --rebase origin main
+python .../properties-admin/build.py            # 檢查 A 有哪些異動沒反映到 B
+python .../properties-admin/build.py --build    # 重建（可加案名只重建指定案）</div>
 
-<span class="lbl">日常操作</span>
-<div class="tree"># 一、看 A 有哪些異動還沒反映到 B
-cd C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-src
-git pull --rebase origin main
-python C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin/build.py
-
-# 二、重建（可加案名只重建指定案）
-cd C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties
-python C:/Users/dell/Documents/Claude-DT/projects/20260904-主題行銷頁/properties-admin/build.py --build
-
-# 三、推送
-git add -A &amp;&amp; git commit -m "重建 &lt;案名&gt;" &amp;&amp; git push origin main</div>
-
-<span class="lbl">build.py 依 cases.json 自動完成</span>
+<span class="lbl">build.py 自動處理</span>
 <ol>
-  <li>讀 A 原稿，移除任何自帶的團隊區塊</li>
-  <li><code>team:full</code> → 主版插入完整版四卡；<code>team:none</code> → 不插（顧問頁、已結案）</li>
-  <li><code>brief:true</code> → 產簡版分身（亂碼後綴目錄用 <code>-b</code>），兩卡＋<code>noindex</code></li>
-  <li><code>noindex_main:true</code> → 主版也加 <code>noindex</code></li>
-  <li><code>on_index:true</code> → 收進公開總覽，<b>整份自動重生，不要手改</b></li>
-  <li>原稿 <code>sha256</code> 記入 <code>manifest.json</code>，供下次比對是否需重建</li>
+  <li>移除原稿自帶的團隊區塊，套上標準版</li>
+  <li><span class="k">team:full</span> 主版四卡；<span class="k">team:none</span> 不套（顧問頁、已結案）</li>
+  <li><span class="k">brief:true</span> 產簡版分身，兩卡＋<span class="k">noindex</span></li>
+  <li><span class="k">on_index:true</span> 收進公開總覽 —— <b style="color:var(--ink)">整份自動重生，不要手改</b></li>
+  <li>原稿 sha256 記入 <span class="k">manifest.json</span>，供下次比對</li>
 </ol>
 
-<span class="lbl">新案要做的兩件事</span>
-<ul>
-  <li><code>cases.json</code> 補一筆設定 —— 沒登錄的案子檢查時會報「A 有新案，cases.json 尚未登錄」，不會漏</li>
-  <li>本台帳補列（完整版與簡版各一列）</li>
-</ul>
-
-給各物件專案的提示詞在 <code>PROMPT-一頁式收頁.md</code> 的 A 段。
+<span class="lbl">工作區</span>
+<p style="margin:0"><span class="k">Documents\Claude-DT\projects\20260904-主題行銷頁\</span>　三個 repo 都在這底下。
+Drive 有同步，所以做完就 push，不要留未推送的 commit 過夜。</p>
 </div>
 
-<h2>REPO 資料夾管理規範</h2>
+<h2>命名與鐵則</h2>
 <div class="panel">
-<div class="tree">C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties\        &lt;- git repo（public，只放可公開的成品）
-├─ .gitignore                        排除 _admin/
-├─ .nojekyll                         關閉 Jekyll，保留底線開頭目錄
-├─ index.html                        公開總覽（僅列在售案；潛銷／結案不列）
-├─ README.md                         repo 說明
-├─ _admin/index.html                 ★ 本頁・私人台帳・不 commit
-└─ &lt;PropCode&gt;/index.html             各物件一頁式（單檔・照片 base64 內嵌）</div>
-
-<span class="lbl">目錄命名 PropCode</span>
 <ul>
-  <li>公開案：<code>地名英拼 + 關鍵數字</code>　例 <code>WangTian5483</code>、<code>Guanlian766</code>、<code>TCIP3464</code></li>
-  <li>潛銷案：再加 <code>-</code> 四碼亂碼　例 <code>ct1300-e58a</code>（網址不可被猜到）</li>
-  <li>同案分身：主目錄名後接單一字母　例 <code>WangTian5483b</code></li>
-  <li>一經上線 <b>不改名、不刪除、不搬家</b> —— 連結已發出去，斷了就是客戶開到 404</li>
-</ul>
-
-<span class="lbl">單一物件 &rarr; 收頁流程</span>
-<ol>
-  <li>各物件資料夾自行製作，產出一份自足的 <code>index.html</code></li>
-  <li>複製到 <code>properties\&lt;PropCode&gt;\index.html</code></li>
-  <li>潛銷／結案 &rarr; 頁內加 <code>&lt;meta name="robots" content="noindex,nofollow"&gt;</code></li>
-  <li>在售案 &rarr; 於根 <code>index.html</code> 補一張卡片；潛銷、結案 <b>不補</b></li>
-  <li>本頁台帳補一列（上架日 = 首次 commit 日）</li>
-  <li><code>git add . ; git commit ; git push</code> &rarr; Pages 約 1 分鐘生效</li>
-</ol>
-
-<span class="lbl">鐵則</span>
-<ul>
-  <li><b>各分頁不得連回本頁</b>，也不得連回根 <code>index.html</code>（目前 6 頁皆無回連，維持）</li>
-  <li>分頁對外導流只允許：<code>about-mac</code>、<code>about</code>（睦聚現傑）、<code>service-demo</code>（購廠分析）、<code>reihe-industrial</code></li>
-  <li>照片一律 base64 內嵌，不放獨立圖檔 —— 單檔可直接寄送、離線可讀</li>
-  <li>結案物件保留頁面，只降狀態，不移不刪</li>
+  <li>目錄名 <span class="k">PropCode</span>：地名英拼＋關鍵數字，例 <span class="k">WangTian5483</span></li>
+  <li>潛銷案再加四碼亂碼，例 <span class="k">ct1300-e58a</span>，網址不可被猜到</li>
+  <li>簡版接 <span class="k">b</span>；主目錄已含亂碼後綴者接 <span class="k">-b</span></li>
+  <li><b style="color:var(--ink)">上線後不改名、不刪除、不搬家</b> —— 連結已發出去，斷了就是客戶開到 404</li>
+  <li>結案物件保留頁面與路徑，只降狀態</li>
+  <li>各分頁不得連回總覽，也不得連回本台帳</li>
+  <li>對外導流只允許四個：關於瑞禾、關於現傑、睦聚現傑、購廠分析</li>
+  <li>照片一律 base64 內嵌 —— 單檔要能直接寄送、離線可讀</li>
 </ul>
 </div>
 
-<h2>認識專案團隊　完整版／簡版</h2>
-<div class="panel">
-每個物件頁的頁尾「KNOW YOUR AGENT・認識專案團隊」區塊分兩種版本，
-共用同一套 HTML 與 CSS，差別只在卡片張數。
-原始碼：<code>snippets/know-your-agent.html</code>（完整版、簡版、所需 CSS 三段都在裡面）。
-
-<span class="lbl">完整版　四張卡</span>
-<ul>
-  <li><b>COMPANY</b>　關於瑞禾　&rarr; <code>reihe-industrial.github.io/web/</code></li>
-  <li><b>AGENT</b>　關於現傑　&rarr; <code>about-mac</code></li>
-  <li><b>PLATFORM</b>　睦聚現傑　&rarr; <code>about</code></li>
-  <li><b>SERVICE</b>　購廠分析　&rarr; <code>service-demo</code></li>
-</ul>
-<div style="margin:6px 0 0 20px;color:var(--muted)">用途：<b style="color:var(--ink)">電子報、已知對象</b>（我知道對方是誰、可安心導流）</div>
-
-<span class="lbl">簡版　兩張卡</span>
-<ul>
-  <li>只留 <b>COMPANY 關於瑞禾</b> + <b>AGENT 關於現傑</b></li>
-  <li>作法：貼完整版後，刪掉 PLATFORM 與 SERVICE 兩個 <code>&lt;a class="more-card"&gt;</code>，其餘不動</li>
-</ul>
-<div style="margin:6px 0 0 20px;color:var(--muted)">用途：<b style="color:var(--ink)">一般散發、同業、屋主</b>（不導流到睦聚平台與購廠分析）</div>
-
-<span class="lbl">命名</span>
-<ul>
-  <li>完整版 = <code>&lt;PropCode&gt;/</code>　　簡版 = <code>&lt;PropCode&gt;b/</code></li>
-  <li>兩版除此區塊外內容應完全一致；主版改內容，簡版必須同步改</li>
-</ul>
-
-<span class="lbl">現況盤點（2026-09-04 完成）</span>
-<ul>
-  <li><span class="st st-on">完整＋簡版</span> <code>WangTian5483</code> / <code>WangTian5483b</code>　—— 09/04 已統一改用 <code>kya</code> 區塊，原生 <code>.more-card</code> 例外取消</li>
-  <li><span class="st st-on">完整＋簡版</span> <code>Guanlian766</code> / <code>Guanlian766b</code></li>
-  <li><span class="st st-on">完整＋簡版</span> <code>TCIP3464</code> / <code>TCIP3464b</code></li>
-  <li><span class="st st-on">完整＋簡版</span> <code>ct1300-e58a</code> / <code>ct1300-e58a-b</code></li>
-  <li><span class="st st-on">完整＋簡版</span> <code>Industrial21</code> / <code>Industrial21b</code>　—— 09/04 收頁補上</li>
-  <li><span class="st st-on">完整＋簡版</span> <code>TCIP2098</code> / <code>TCIP2098b</code>　—— 原本只有 PLATFORM+SERVICE 兩卡且 PLATFORM 指向 <code>mac-chang-hub</code>，已統一為 canonical 四卡</li>
-  <li><span class="st st-off">不適用</span> <code>HotaChiayi3</code>（已結案）、<code>TCIP38-parking</code>（顧問頁）</li>
-</ul>
-<span class="lbl">實作方式</span>
-<ul>
-  <li>各物件頁 CSS 詞彙不一致（多數沒有 <code>--border</code>／<code>--forest</code>／<code>.sec-head</code>），
-      因此區塊改為 <b>自帶 &lt;style&gt;、<code>kya-</code> 前綴、顏色寫死</b>，零 CSS 相依，貼在 <code>&lt;footer&gt;</code> 前即可</li>
-  <li>簡版一律加 <code>noindex,nofollow</code>，避免與主版形成重複內容</li>
-</ul>
+<footer>最後整理 2026-09-04　·　資料以 properties-admin/cases.json 為準　·　內部使用</footer>
 
 </div>
 
-<h2 class="todo">待處理</h2>
-<div class="panel">
-<ul class="todolist">
-  <li><b>4 頁缺 noindex</b>：<code>WangTian5483</code>、<code>WangTian5483b</code>、<code>Guanlian766</code>、<code>TCIP3464</code>
-      —— 目前會被 Google 收錄。主版與 b 版同時被收錄尤其尷尬（同內容兩網址）。是否補上？</li>
-  <li><b>根 index.html</b>：現公開列出 <b>4 案</b>（Guanlian766／TCIP3464／WangTian5483／ct1300-e58a），簡版分身皆不列。原題：要保留這個公開總覽嗎（Guanlian766／TCIP3464／WangTian5483）。要保留這個公開總覽，還是改成空白頁、一律直接發送個別網址？</li>
-    <li><b>大埔美 8881 原始素材歸檔</b>：一次性物件已結案，頁面留存；謄本／照片／簡報是否要在物件資料夾整理歸檔？</li>
-</ul>
-</div>
-
-<footer>物件一頁式管理台帳　&middot;　最後整理 2026-09-04（A/B/C 三層架構・全頁 noindex・properties 已同步）　&middot;　僅供內部使用</footer>
-
-</div>
 <script>
-var rows=[].slice.call(document.querySelectorAll('tbody tr')),
-    chips=[].slice.call(document.querySelectorAll('.chip')),
-    c=document.getElementById('cnt');
-function apply(f){
-  var n=0;
-  rows.forEach(function(r){
-    var ok=(f==='all'||r.getAttribute('data-s')===f);
-    r.style.display=ok?'':'none'; if(ok)n++;
+(function(){
+  var rows=[].slice.call(document.querySelectorAll('tbody tr'));
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  var out=document.getElementById('shown');
+  function apply(f){
+    var n=0;
+    rows.forEach(function(r){
+      var ok=(f==='all'||r.getAttribute('data-s')===f);
+      r.style.display=ok?'':'none';
+      if(ok)n++;
+    });
+    out.textContent='顯示 '+n+' / '+rows.length+' 案';
+  }
+  chips.forEach(function(b){
+    b.addEventListener('click',function(){
+      chips.forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');
+      apply(b.getAttribute('data-f'));
+    });
   });
-  c.textContent='顯示 '+n+' / '+rows.length+' 件';
-}
-chips.forEach(function(b){
-  b.onclick=function(){
-    chips.forEach(function(x){x.classList.remove('on')});
-    b.classList.add('on'); apply(b.getAttribute('data-f'));
-  };
-});
-apply('all');
+  apply('all');
+})();
 </script>
+
 </body>
 </html>
