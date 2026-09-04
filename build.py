@@ -124,19 +124,20 @@ INDEX_TPL = """<!DOCTYPE html>
 <meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--forest:#2B5937;--gold:#C0A434;--ink:#26302A;--muted:#77806F;--border:#E8E6E1}
+:root{--forest:#2B5937;--gold:#C0A434;--ink:#26302A;--muted:#67705F;--border:#E8E6E1}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:#FDFCFA;color:#333;line-height:1.7}
+html{color-scheme:light}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:#FDFCFA;color:#39433A;font-size:16px;line-height:1.75}
 .wrap{max-width:760px;margin:0 auto;padding:64px 24px}
-.eyebrow{font-size:12px;letter-spacing:5px;color:var(--gold);font-weight:700;margin-bottom:10px}
+.eyebrow{font-size:14px;letter-spacing:5px;color:var(--gold);font-weight:700;margin-bottom:10px}
 h1{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:2px;margin-bottom:6px}
-.lead{font-size:14px;color:var(--muted);margin-bottom:40px}
+.lead{font-size:16px;color:var(--muted);margin-bottom:40px}
 a.card{display:block;border:1px solid var(--border);border-radius:3px;padding:24px 26px;text-decoration:none;margin-bottom:16px;transition:.2s;background:#fff}
 a.card:hover{border-color:var(--gold);box-shadow:0 10px 26px rgba(43,89,55,.10);transform:translateY(-2px)}
-a.card .t{font-size:19px;font-weight:900;color:var(--ink);letter-spacing:1px}
-a.card .s{font-size:13px;color:var(--muted);margin-top:4px}
+a.card .t{font-size:20px;font-weight:900;color:var(--ink);letter-spacing:1px}
+a.card .s{font-size:15px;color:var(--muted);margin-top:4px}
 a.card .go{float:right;color:var(--gold);font-weight:900}
-footer{margin-top:56px;font-size:12px;color:#AAA;letter-spacing:1px}
+footer{margin-top:56px;font-size:14px;color:#AAA;letter-spacing:1px}
 </style>
 </head>
 <body>
