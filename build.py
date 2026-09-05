@@ -25,6 +25,7 @@ build.py　—— 由原稿 A 產生成品 B
 import hashlib, io, json, os, re, sys
 
 import layout   # 統一 HERO／KPI／footer
+import links    # 電子報連結頁
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 SRC   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src"
@@ -196,6 +197,9 @@ if __name__ == "__main__":
     if "--build" in sys.argv:
         for code, made in build(cases, args or None):
             print("建置 %-16s -> %s" % (code, "、".join(made)))
+        import datetime
+        n = links.build(cases, updated=datetime.date.today().strftime("%Y-%m-%d"))
+        print("電子報連結頁 %d 案" % n)
     else:
         rows = check(cases)
         if not rows:

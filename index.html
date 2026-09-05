@@ -132,6 +132,14 @@ h2{
 .vcard ul{margin:0; padding-left:22px; font-size:15px; color:var(--dim)}
 .vcard li{margin-bottom:5px}
 
+.navto{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--forest);
+color:#F2F4EE;border-radius:5px;padding:18px 22px;margin-bottom:26px}
+.navto .t{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px}
+.navto .d{font-size:15px;color:rgba(255,255,255,.82)}
+.navto a{margin-left:auto;background:var(--gold-bright);color:#1B2A18;text-decoration:none;
+font-weight:700;font-size:15px;padding:11px 22px;border-radius:4px;white-space:nowrap}
+.navto a:hover{background:#D8BC55}
+@media(max-width:640px){.navto a{margin-left:0;width:100%;text-align:center}}
 footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font-size:14px; color:var(--dim); letter-spacing:.04em}
 
 @media(max-width:640px){
@@ -151,6 +159,14 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
   <h1>物件一頁式　管理台帳</h1>
   <div class="sub">瑞禾開發／睦聚　·　本頁即物件總覽，成品站無首頁，一律從這裡取連結</div>
 </header>
+
+<div class="navto">
+  <div>
+    <div class="t">物件連結速查</div>
+    <div class="d">只有完整版／簡版網址與一鍵複製 —— 做電子報時給助理用這頁</div>
+  </div>
+  <a href="./links/">開啟連結頁 &rarr;</a>
+</div>
 
 <div class="tally">
   <div><b>8</b><span>案件</span></div>

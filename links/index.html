@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>物件連結速查</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap">
+<style>
+html{color-scheme:light}
+:root{--paper:#F7F6F1;--surface:#fff;--sunk:#EFEDE4;--ink:#1E2620;--body:#39433A;
+--dim:#67705F;--line:#DEDCD1;--forest:#2B5937;--gold:#8E7318;--gold-b:#C0A434;
+--ok:#276033;--ok-bg:#E4EFE6;--warn:#7A5D0E;--warn-bg:#F4EBD4;--off:#6B7268;--off-bg:#E7E6DE}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--body);
+font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;font-size:16px;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 90px}
+.eyebrow{font-size:14px;letter-spacing:.24em;color:var(--gold);font-weight:700;margin-bottom:8px}
+h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:30px;color:var(--ink);
+letter-spacing:.04em;margin:0 0 10px}
+.lead{font-size:16px;color:var(--dim);margin-bottom:14px}
+.tip{background:var(--sunk);border-left:4px solid var(--gold-b);padding:14px 18px;
+border-radius:0 4px 4px 0;font-size:15px;line-height:1.8;margin-bottom:30px}
+.tip b{color:var(--ink)}
+
+.case{background:var(--surface);border:1px solid var(--line);border-radius:5px;
+padding:22px 24px;margin-bottom:18px}
+.case.past{opacity:.62}
+.hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.nm{font-family:"Noto Serif TC",serif;font-weight:700;font-size:21px;color:var(--ink);letter-spacing:.02em}
+.meta{font-size:14px;color:var(--dim)}
+.tag{font-size:14px;font-weight:700;padding:3px 11px;border-radius:4px;margin-left:auto}
+.t-ok{background:var(--ok-bg);color:var(--ok)}
+.t-warn{background:var(--warn-bg);color:var(--warn)}
+.t-off{background:var(--off-bg);color:var(--off)}
+
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+padding:13px 0;border-top:1px solid #EFEDE4}
+.row:first-of-type{border-top:0}
+.ver{flex:0 0 96px;font-size:15px;font-weight:700;color:var(--ink)}
+.ver small{display:block;font-weight:400;font-size:14px;color:var(--dim);margin-top:1px}
+.url{flex:1 1 300px;min-width:0;font-family:ui-monospace,Consolas,monospace;font-size:14px;
+color:var(--forest);background:var(--sunk);border-radius:3px;padding:9px 12px;
+overflow-x:auto;white-space:nowrap;text-decoration:none;display:block}
+.url:hover{color:var(--gold)}
+.btn{flex:0 0 auto;font:inherit;font-size:15px;font-weight:700;cursor:pointer;
+border:1px solid var(--forest);background:var(--forest);color:#F4F6F0;
+padding:10px 20px;border-radius:4px;transition:.15s;white-space:nowrap;min-width:104px}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:#FFF9E8}
+.btn:focus-visible{outline:3px solid var(--gold-b);outline-offset:2px}
+.btn.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.btn.open{background:var(--surface);color:var(--forest);min-width:0}
+.btn.open:hover{background:var(--sunk);color:var(--gold)}
+
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+font-size:14px;color:var(--dim)}
+footer a{color:var(--forest)}
+@media(max-width:640px){
+  .wrap{padding:26px 14px 70px}
+  .ver{flex:0 0 100%}
+  .url{flex:1 1 100%}
+  .btn{flex:1 1 auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">FOR NEWSLETTER</div>
+  <h1>物件連結速查</h1>
+  <div class="lead">做電子報時從這裡取連結，按「複製」即可貼上。</div>
+
+  <div class="tip">
+    <b>完整版</b>　頁尾有四張團隊卡（關於瑞禾／關於現傑／睦聚現傑／購廠分析）。
+    <b>電子報、認識的對象用這個。</b><br>
+    <b>簡版</b>　只留關於瑞禾＋關於現傑，不導流到睦聚平台與購廠分析。
+    <b>一般散發、同業、屋主用這個。</b>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">王田 5483</div><div class="meta">售</div><span class="tag t-ok">在售／在租</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/WangTian5483/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/WangTian5483/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/WangTian5483/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/WangTian5483/" target="_blank" rel="noopener">開啟</a>
+    </div>
+    <div class="row">
+      <div class="ver">簡版<small>兩卡・散發</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/WangTian5483b/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/WangTian5483b/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/WangTian5483b/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/WangTian5483b/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">關連三照合法美廠房</div><div class="meta">售</div><span class="tag t-ok">在售／在租</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/Guanlian766/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/Guanlian766/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/Guanlian766/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/Guanlian766/" target="_blank" rel="noopener">開啟</a>
+    </div>
+    <div class="row">
+      <div class="ver">簡版<small>兩卡・散發</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/Guanlian766b/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/Guanlian766b/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/Guanlian766b/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/Guanlian766b/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">台中工業區 樓層式廠辦</div><div class="meta">租</div><span class="tag t-ok">在售／在租</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/TCIP3464/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/TCIP3464/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/TCIP3464/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/TCIP3464/" target="_blank" rel="noopener">開啟</a>
+    </div>
+    <div class="row">
+      <div class="ver">簡版<small>兩卡・散發</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/TCIP3464b/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/TCIP3464b/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/TCIP3464b/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/TCIP3464b/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">中台樓層式 1300</div><div class="meta">售</div><span class="tag t-ok">在售／在租</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/ct1300-e58a/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/ct1300-e58a/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a/" target="_blank" rel="noopener">開啟</a>
+    </div>
+    <div class="row">
+      <div class="ver">簡版<small>兩卡・散發</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a-b/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/ct1300-e58a-b/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/ct1300-e58a-b/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/ct1300-e58a-b/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">工業區 21 路帶照案</div><div class="meta">售</div><span class="tag t-ok">在售／在租</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/Industrial21/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/Industrial21/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/Industrial21/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/Industrial21/" target="_blank" rel="noopener">開啟</a>
+    </div>
+    <div class="row">
+      <div class="ver">簡版<small>兩卡・散發</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/Industrial21b/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/Industrial21b/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/Industrial21b/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/Industrial21b/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">台中工業區 2098</div><div class="meta">買方需求</div><span class="tag t-ok">在售／在租</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/TCIP2098/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/TCIP2098/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/TCIP2098/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/TCIP2098/" target="_blank" rel="noopener">開啟</a>
+    </div>
+    <div class="row">
+      <div class="ver">簡版<small>兩卡・散發</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/TCIP2098b/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/TCIP2098b/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/TCIP2098b/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/TCIP2098b/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case past">
+    <div class="hd"><div class="nm">大埔美 8881</div><div class="meta">售</div><span class="tag t-off">已結案</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/HotaChiayi3/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/HotaChiayi3/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/HotaChiayi3/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/HotaChiayi3/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="hd"><div class="nm">工業區二十路案　前院停車配置建議</div><div class="meta">顧問</div><span class="tag t-warn">顧問頁</span></div>
+    <div class="row">
+      <div class="ver">完整版<small>四卡・電子報</small></div>
+      <a class="url" href="https://mac2good909777-commits.github.io/properties/TCIP38-parking/" target="_blank" rel="noopener">https://mac2good909777-commits.github.io/properties/TCIP38-parking/</a>
+      <button class="btn" data-url="https://mac2good909777-commits.github.io/properties/TCIP38-parking/">複製連結</button>
+      <a class="btn open" href="https://mac2good909777-commits.github.io/properties/TCIP38-parking/" target="_blank" rel="noopener">開啟</a>
+    </div>
+  </div>
+
+  <footer>共 8 案　·　資料更新 2026-09-05　·　<a href="../">回管理台帳</a></footer>
+</div>
+
+<script>
+document.addEventListener('click', function(e){
+  var b = e.target.closest('.btn[data-url]');
+  if(!b) return;
+  var url = b.getAttribute('data-url'), old = b.textContent;
+  function done(){
+    b.textContent = '\u5df2\u8907\u88fd \u2713';
+    b.classList.add('done');
+    setTimeout(function(){ b.textContent = old; b.classList.remove('done'); }, 1600);
+  }
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(url).then(done, fallback);
+  } else { fallback(); }
+  function fallback(){
+    var t = document.createElement('textarea');
+    t.value = url; t.style.position='fixed'; t.style.opacity='0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); done(); } catch(err) { window.prompt('請手動複製：', url); }
+    document.body.removeChild(t);
+  }
+});
+</script>
+</body>
+</html>
