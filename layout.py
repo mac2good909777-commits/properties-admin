@@ -123,6 +123,83 @@ def hero_html(h):
        TEL_HREF, TEL_DISPLAY, b2, kpis)
 
 
+QR = io.open(os.path.join(ADMIN, "assets", "line-qr.txt"), encoding="utf-8").read().strip()
+
+CONTACT_CSS = """<style>
+/* ===== 統一專案窗口卡（由 layout.py 產生，勿手改） ===== */
+.uct{background:#F7F6F1;padding:70px 22px}
+.uct-head{text-align:center;margin-bottom:34px}
+.uct-en{font-size:14px;letter-spacing:.24em;color:#8E7318;font-weight:700;margin-bottom:8px}
+.uct-h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:clamp(24px,3.4vw,30px);
+  color:#1E2620;letter-spacing:.06em;margin:0}
+.ctc{max-width:660px;margin:0 auto;background:#fff;border:1px solid #DEDCD1;
+  border-radius:4px;padding:28px 30px;text-align:left}
+.ctc-top{display:flex;gap:28px;align-items:center}
+.ctc-who{flex:1 1 auto;min-width:0;padding-right:26px;border-right:1px solid #DEDCD1}
+.ctc-eyebrow{font-size:14px;letter-spacing:.24em;color:#8E7318;font-weight:700}
+.ctc-name{font-size:28px;font-weight:900;color:#1E2620;letter-spacing:.06em;margin:0;
+  line-height:1.25;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ctc-name span{font-size:15px;font-weight:400;color:#67705F;letter-spacing:.1em}
+.ctc-tel{display:inline-block;font-size:33px;font-weight:900;color:#2B5937;text-decoration:none;
+  letter-spacing:.01em;margin:16px 0 0;font-variant-numeric:tabular-nums;line-height:1.05}
+.ctc-tel:hover{color:#8E7318}
+.ctc-qr{flex:0 0 auto;text-align:center}
+.ctc-qr img{width:120px;height:120px;border:1px solid #DEDCD1;border-radius:6px;
+  padding:6px;background:#fff;display:block}
+.ctc-qr span{display:block;margin-top:8px;font-size:14px;color:#67705F;letter-spacing:.08em}
+@media(max-width:640px){
+  .uct{padding:52px 16px}
+  .ctc{padding:24px 20px}
+  .ctc-top{flex-direction:column;gap:20px;align-items:flex-start}
+  .ctc-who{border-right:0;padding-right:0;border-bottom:1px solid #DEDCD1;padding-bottom:18px;width:100%}
+  .ctc-tel{font-size:29px}
+}
+</style>"""
+
+CONTACT = """
+<section class="uct" id="contact">
+  <div class="uct-head">
+    <div class="uct-en">PROJECT CONTACT</div>
+    <h2 class="uct-h2">專案窗口</h2>
+  </div>
+  <div class="ctc">
+    <div class="ctc-top">
+      <div class="ctc-who">
+        <div class="ctc-eyebrow">PROJECT CONTACT</div>
+        <div class="ctc-name">張現傑<span>瑞禾開發　工業地產部業務總監</span></div>
+        <a class="ctc-tel" href="%s">%s</a>
+      </div>
+      <div class="ctc-qr">
+        <img src="%s" alt="加 LINE 張現傑">
+        <span>掃碼加 LINE</span>
+      </div>
+    </div>
+  </div>
+</section>
+""" % (TEL_HREF, TEL_DISPLAY, QR)
+
+
+def _drop_contact(html):
+    """移除各頁原有的聯絡卡（只拿掉卡片本體，保留該段的文案）。"""
+    # 整段就是聯絡區的，直接刪整段
+    for pat in (r'<section class="contact"[^>]*>', r'<section class="uct"[^>]*>'):
+        while True:
+            m = re.search(pat, html)
+            if not m:
+                break
+            a, b = _cut(html, m.start())
+            html = html[:a] + html[b:]
+    # 只是段落裡的一張卡，刪卡就好
+    for cls in ("ctc", "ct-card", "contact-card", "qr-row", "ctabox", "r contact"):
+        while True:
+            m = re.search(r'<div class="%s"[^>]*>' % re.escape(cls), html)
+            if not m:
+                break
+            a, b = _cut(html, m.start())
+            html = html[:a] + html[b:]
+    return html
+
+
 FOOTER = """
 <footer class="uft">
   <div class="uft-in">
@@ -199,17 +276,17 @@ def apply(html, hero_cfg):
     # 3. 移除舊 footer
     html = re.sub(r"(?s)\n?<footer.*?</footer>\s*", "\n", html)
 
+    # 3b. 移除各頁原有的聯絡卡
+    html = _drop_contact(html)
+
     # 4. 插入新的
     fonts = "" if "Noto+Serif+TC" in html else FONTS
-    html = html.replace("</head>", fonts + CSS + "\n</head>", 1)
+    html = html.replace("</head>", fonts + CSS + CONTACT_CSS + "\n</head>", 1)
     m = re.search(r"<body[^>]*>", html)
     html = html[:m.end()] + "\n" + hero_html(cfg) + html[m.end():]
     m = re.search(r"</body>", html)
-    foot = FOOTER
-    if 'id="contact"' not in html:      # 沒有聯絡區錨點時，讓 #contact 指向統一 footer
-        foot = foot.replace('<footer class="uft">', '<footer class="uft" id="contact">', 1)
-    html = html[:m.start()] + foot + "\n" + html[m.start():]
-    return readability(html)
+    # 專案窗口卡固定接在 footer 之前（團隊卡稍後由 build.py 插在兩者之間）
+    return html[:m.start()] + CONTACT + FOOTER + "\n" + html[m.start():]
 
 
 # ---------------------------------------------------------------- 可讀性
