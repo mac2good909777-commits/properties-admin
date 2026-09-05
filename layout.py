@@ -123,6 +123,70 @@ def hero_html(h):
        TEL_HREF, TEL_DISPLAY, b2, kpis)
 
 
+IM_CSS = """<style>
+/* ===== 統一「完整銷售報告書 備索」（由 layout.py 產生，勿手改） ===== */
+.uim{background:linear-gradient(160deg,#15211A 0%,#1D2C23 100%);color:#fff;padding:76px 22px}
+.uim-in{max-width:1040px;margin:0 auto}
+.uim-head{text-align:center;margin-bottom:34px}
+.uim-en{font-size:14px;letter-spacing:.24em;color:#D8BC55;font-weight:700;margin-bottom:10px}
+.uim-h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:clamp(24px,3.4vw,32px);
+  color:#fff;letter-spacing:.06em;margin:0}
+.uim-lead{margin:14px auto 0;font-size:16px;color:rgba(255,255,255,.72);max-width:60ch;line-height:1.8}
+.uim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}
+.uim-item{border:1px solid rgba(255,255,255,.14);border-radius:3px;padding:26px 20px;text-align:center}
+.uim-item .ic{width:34px;height:34px;margin:0 auto 12px;border:1px solid #C0A434;color:#D8BC55;
+  font-weight:900;font-size:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.uim-item h4{font-size:16px;font-weight:700;letter-spacing:.06em;margin:0 0 6px;color:#fff}
+.uim-item p{font-size:14.5px;color:rgba(255,255,255,.62);line-height:1.7;margin:0}
+.uim-note{text-align:center;font-size:clamp(18px,2.6vw,23px);font-weight:900;letter-spacing:.08em;
+  margin-top:30px;color:#fff}
+.uim-note em{font-style:normal;color:#D8BC55}
+@media(max-width:760px){
+  .uim{padding:56px 16px}
+  .uim-grid{grid-template-columns:1fr;gap:12px}
+}
+</style>"""
+
+
+def im_html(cfg):
+    """cfg = cases.json 的 im 設定。items 為三張卡，extra 為可選的附加區塊檔名。"""
+    items = "".join(
+        '<div class="uim-item"><div class="ic">%s</div><h4>%s</h4><p>%s</p></div>' % (k, h, p)
+        for k, h, p in cfg["items"])
+    lead = '<div class="uim-lead">%s</div>' % cfg["lead"] if cfg.get("lead") else ""
+    extra = ""
+    if cfg.get("extra"):
+        fp = os.path.join(ADMIN, "assets", cfg["extra"])
+        if os.path.isfile(fp):
+            extra = io.open(fp, encoding="utf-8").read()
+    return """
+<section class="uim" id="im">
+  <div class="uim-in">
+    <div class="uim-head">
+      <div class="uim-en">INFORMATION MEMORANDUM</div>
+      <h2 class="uim-h2">完整銷售報告書　備索</h2>
+      %s
+    </div>
+    <div class="uim-grid">%s</div>
+    %s
+    <div class="uim-note">本案採<em>預約制</em>提供資料與帶看，詳見下方專案窗口</div>
+  </div>
+</section>
+""" % (lead, items, extra)
+
+
+def _drop_im(html):
+    """移除各頁原有的備索段（只認 class 含 im 的區塊，避免誤刪其他段落）。"""
+    for pat in (r'<section class="im"[^>]*>', r'<section class="uim"[^>]*>'):
+        while True:
+            m = re.search(pat, html)
+            if not m:
+                break
+            a, b = _cut(html, m.start())
+            html = html[:a] + html[b:]
+    return html
+
+
 QR = io.open(os.path.join(ADMIN, "assets", "line-qr.txt"), encoding="utf-8").read().strip()
 
 CONTACT_CSS = """<style>
@@ -246,7 +310,7 @@ def _nth_image(html, n):
     return imgs[n] if n < len(imgs) else None
 
 
-def apply(html, hero_cfg):
+def apply(html, hero_cfg, im_cfg=None):
     """換掉原頁的 hero（含緊接的 KPI 條）與 footer，插入統一版型。"""
     cfg = dict(hero_cfg)
 
@@ -275,17 +339,19 @@ def apply(html, hero_cfg):
     # 3. 移除舊 footer
     html = re.sub(r"(?s)\n?<footer.*?</footer>\s*", "\n", html)
 
-    # 3b. 移除各頁原有的聯絡卡
+    # 3b. 移除各頁原有的聯絡卡與備索段
     html = _drop_contact(html)
+    html = _drop_im(html)
 
     # 4. 插入新的
     fonts = "" if "Noto+Serif+TC" in html else FONTS
-    html = html.replace("</head>", fonts + CSS + CONTACT_CSS + "\n</head>", 1)
+    html = html.replace("</head>", fonts + CSS + IM_CSS + CONTACT_CSS + "\n</head>", 1)
     m = re.search(r"<body[^>]*>", html)
     html = html[:m.end()] + "\n" + hero_html(cfg) + html[m.end():]
     m = re.search(r"</body>", html)
-    # 專案窗口卡固定接在 footer 之前（團隊卡稍後由 build.py 插在兩者之間）
-    return html[:m.start()] + CONTACT + FOOTER + "\n" + html[m.start():]
+    # 尾段固定順序：備索 → 專案窗口 →（團隊卡由 build.py 插入）→ footer
+    tail = (im_html(im_cfg) if im_cfg else "") + CONTACT + FOOTER
+    return html[:m.start()] + tail + "\n" + html[m.start():]
 
 
 # ---------------------------------------------------------------- 可讀性

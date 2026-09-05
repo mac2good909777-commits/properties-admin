@@ -165,7 +165,7 @@ def build(cases, only=None):
 
         # 版型統一：換掉原頁 hero 與 footer（顧問頁等無 hero 設定者不換版型）
         if c.get("hero"):
-            raw = layout.apply(raw, c["hero"])
+            raw = layout.apply(raw, c["hero"], c.get("im"))
 
         # 可讀性處理放在最後，才涵蓋得到後面才插入的團隊卡
         full = with_team(raw, True) if c.get("team") == "full" else strip_team(raw)
