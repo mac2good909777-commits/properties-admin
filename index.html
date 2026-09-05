@@ -386,11 +386,11 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
 <div class="panel">
 <p>八個案子的原稿版型各不相同（八種 hero、八種 footer）。客戶從電子報點不同案，
 版面一直變會顯得不專業，因此建置時把每頁的<b style="color:var(--ink)">最上與最下換成同一套</b>。
-模板取自 <span class="k">TCIP3464</span>（有底圖）與 <span class="k">WangTian5483</span>（文字型）。</p>
+模板取自 <span class="k">WangTian5483</span>（文字型）、<span class="k">Guanlian766</span> 與 <span class="k">TCIP3464</span>（有底圖）三案。</p>
 
 <span class="lbl">HERO</span>
 <ul>
-  <li>有底圖：室內照 ＋ 深色遮罩，左側瑞禾 LOGO 白底方塊</li>
+  <li>有底圖：現場照片 ＋ 深色遮罩，左側瑞禾 LOGO 白底方塊。挑圖以<b style="color:var(--ink)">看不出建物外觀</b>的室內或局部照為原則</li>
   <li>無底圖：同結構，背景改深綠漸層</li>
   <li>金框標籤 → 大標題 → 副標 → 兩顆按鈕（金色電話＋線框次要動作）</li>
   <li>下接 KPI 條：深綠底四格金色數字</li>
@@ -413,12 +413,15 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font
 
 <h2>三層架構</h2>
 <div class="panel">
-<div class="flow">A  properties-src    原稿。各專案 push 到這裡
+<div class="flow">A  properties-src    public・開 Pages    原稿。各專案 push 到這裡
         │
-        │  build.py 依 cases.json 建置
+        │  build.py＋layout.py 依 cases.json 建置
         ▼
-B  properties        成品。只有「主題行銷頁」對話寫入，網址永遠不變
-C  properties-admin  build.py + cases.json + manifest.json + 本台帳</div>
+B  properties        public・開 Pages    成品。只有「主題行銷頁」對話寫入，網址永遠不變
+                     ★ 無首頁，根目錄回 404 —— 物件連結一律從本台帳取
+
+C  properties-admin  public・開 Pages    build.py + layout.py + cases.json
+                     + manifest.json + 本台帳（你正在看的這頁）</div>
 
 <p>各專案只碰 <span class="k">A</span>，改完 push 後到「主題行銷頁」對話說一聲「更新 &lt;PropCode&gt;」。
 比對原稿 <span class="k">sha256</span> 有變就重建 <span class="k">B</span>，成品網址一個都不會動。</p>
@@ -433,12 +436,24 @@ python .../properties-admin/build.py --build    # 重建（可加案名只重建
   <li>移除原稿自帶的團隊區塊，套上標準版</li>
   <li><span class="k">team:full</span> 主版四卡；<span class="k">team:none</span> 不套（顧問頁、已結案）</li>
   <li><span class="k">brief:true</span> 產簡版分身，兩卡＋<span class="k">noindex</span></li>
+  <li>頁面若無 <span class="k">#contact</span> 錨點，統一 footer 自動兼任，避免 hero 次要按鈕點了沒反應</li>
   <li>原稿 sha256 記入 <span class="k">manifest.json</span>，供下次比對</li>
 </ol>
 
 <span class="lbl">工作區</span>
 <p style="margin:0"><span class="k">Documents\Claude-DT\projects\20260904-主題行銷頁\</span>　三個 repo 都在這底下。
 Drive 有同步，所以做完就 push，不要留未推送的 commit 過夜。</p>
+</div>
+
+<h2>對外揭露原則</h2>
+<div class="panel">
+<ul>
+  <li><b style="color:var(--ink)">全站 noindex,nofollow</b> —— 物件頁不進搜尋引擎，只靠直接發送連結曝光</li>
+  <li><b style="color:var(--ink)">本台帳是公開頁</b>，因此不寫門牌、地號、屋主名稱、建照字號，只到「行政區・園區」層級</li>
+  <li><b style="color:var(--ink)">公司市話一律不放</b>（04-2380-3560 已全數移除）；公司名稱與地址保留</li>
+  <li>聯絡方式統一寫「<b style="color:var(--ink)">專案負責人 0953-909-777</b>」，連結一律 <span class="k">tel:0953909777</span></li>
+  <li>物件頁本身仍載明完整門牌與地號 —— 那是要給客戶看的，與台帳的揭露層級不同</li>
+</ul>
 </div>
 
 <h2>命名與鐵則</h2>
