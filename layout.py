@@ -69,7 +69,8 @@ CSS = """<style>
 .uft-in{max-width:1000px;margin:0 auto;text-align:center}
 .uft-co{color:#E7EDE5;font-family:"Noto Serif TC",serif;font-weight:700;font-size:19px;letter-spacing:.05em}
 .uft-en{font-size:14px;letter-spacing:.1em;color:#7C8E7C;margin-top:6px}
-.uft-line{margin-top:18px}
+.uft-line{margin-top:14px}
+.uft-lic{font-size:14px;color:#7C8E7C;line-height:1.8}
 .uft-line b{color:#D8BC55;font-weight:700}
 .uft-line a{color:#D8BC55;text-decoration:none;font-weight:700}
 .uft-line a:hover{text-decoration:underline}
@@ -129,7 +130,9 @@ FOOTER = """
 <footer class="uft">
   <div class="uft-in">
     <div class="uft-co">瑞禾不動產經紀股份有限公司</div>
-    <div class="uft-en">RUEI.HE REAL ESTATE BROKERAGE CO., LTD.　｜　臺中市南屯區益豐路四段 91 號</div>
+    <div class="uft-en">RUEI.HE REAL ESTATE BROKERAGE CO., LTD.</div>
+    <div class="uft-line">臺中市南屯區益豐路四段 91 號</div>
+    <div class="uft-line uft-lic">不動產經紀人（108）中市經紀字第 01847 號　·　經濟部產業園區管理局 115 年度產業用地媒合專案 委託執行單位</div>
     <div class="uft-note">
       本頁資訊依現有資料善意整理，僅供參考，不構成任何要約或承諾。
       面積、使用分區、建物登記等以地政機關登記資料及不動產說明書為準；
