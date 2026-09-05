@@ -163,11 +163,13 @@ def build(cases, only=None):
             print("略過 %-16s 原稿不存在" % c["code"]); continue
         raw = io.open(src, encoding="utf-8").read()
 
-        # 版型統一：換掉原頁 hero 與 footer（顧問頁等無 hero 設定者跳過）
+        # 版型統一：換掉原頁 hero 與 footer（顧問頁等無 hero 設定者不換版型）
         if c.get("hero"):
             raw = layout.apply(raw, c["hero"])
 
+        # 可讀性處理放在最後，才涵蓋得到後面才插入的團隊卡
         full = with_team(raw, True) if c.get("team") == "full" else strip_team(raw)
+        full = layout.readability(full)
         if c.get("noindex_main"):
             full = with_noindex(full)
         os.makedirs(os.path.join(DST, c["code"]), exist_ok=True)
@@ -178,7 +180,7 @@ def build(cases, only=None):
             bc = brief_code(c["code"])
             os.makedirs(os.path.join(DST, bc), exist_ok=True)
             io.open(os.path.join(DST, bc, "index.html"), "w", encoding="utf-8"
-                    ).write(with_noindex(with_team(raw, False)))
+                    ).write(with_noindex(layout.readability(with_team(raw, False))))
             made.append(bc)
 
         man[c["code"]] = {"src_sha256": sha(src), "outputs": made}

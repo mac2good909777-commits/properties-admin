@@ -201,4 +201,57 @@ def apply(html, hero_cfg):
     foot = FOOTER
     if 'id="contact"' not in html:      # 沒有聯絡區錨點時，讓 #contact 指向統一 footer
         foot = foot.replace('<footer class="uft">', '<footer class="uft" id="contact">', 1)
-    return html[:m.start()] + foot + "\n" + html[m.start():]
+    html = html[:m.start()] + foot + "\n" + html[m.start():]
+    return readability(html)
+
+
+# ---------------------------------------------------------------- 可讀性
+
+MOBILE_CSS = """<style>
+/* ===== 可讀性與手機適配（由 layout.py 產生，勿手改） ===== */
+html{-webkit-text-size-adjust:100%}
+img,svg,video{max-width:100%;height:auto}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tbl-scroll>table{min-width:520px}
+@media(max-width:640px){
+  h1{line-height:1.28}
+  h2{line-height:1.36}
+  body{line-height:1.75}
+}
+</style>"""
+
+
+def _bump(px):
+    """把小於 14px 的字級抬到 14 以上，並保留原有大小順序。"""
+    if px >= 14:
+        return None
+    if px <= 11:
+        return 14.0
+    if px <= 12.5:
+        return 14.5
+    if px <= 13.5:
+        return 15.0
+    return 15.5
+
+
+def readability(html):
+    """字級下限 14px、無捲軸的表格包一層、補上手機適配樣式。"""
+    def fix(m):
+        nv = _bump(float(m.group(1)))
+        return m.group(0) if nv is None else "font-size:%gpx" % nv
+
+    html = re.sub(r"font-size:\s*([0-9.]+)px", fix, html)
+
+    spots = []
+    for m in re.finditer(r"<table\b", html):
+        a = m.start()
+        near = html[max(0, a - 260):a]
+        if "overflow-x" in near or "tbl-scroll" in near or "tablewrap" in near:
+            continue
+        spots.append((a, _cut(html, a)[1]))
+    for a, e in reversed(spots):
+        html = html[:a] + '<div class="tbl-scroll">' + html[a:e] + "</div>" + html[e:]
+
+    if "tbl-scroll{overflow-x" not in html:
+        html = html.replace("</head>", MOBILE_CSS + "\n</head>", 1)
+    return html
