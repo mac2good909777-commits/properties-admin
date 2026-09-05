@@ -201,4 +201,7 @@ def apply(html, hero_cfg):
     m = re.search(r"<body[^>]*>", html)
     html = html[:m.end()] + "\n" + hero_html(cfg) + html[m.end():]
     m = re.search(r"</body>", html)
-    return html[:m.start()] + FOOTER + "\n" + html[m.start():]
+    foot = FOOTER
+    if 'id="contact"' not in html:      # 沒有聯絡區錨點時，讓 #contact 指向統一 footer
+        foot = foot.replace('<footer class="uft">', '<footer class="uft" id="contact">', 1)
+    return html[:m.start()] + foot + "\n" + html[m.start():]
