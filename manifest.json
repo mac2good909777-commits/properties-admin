@@ -10,7 +10,7 @@
     "outputs": [
       "HotaChiayi3"
     ],
-    "src_sha256": "0b25251e870b49c81d17955d926f85f46b35a9913ac2ddefce6ba07c3c451585"
+    "src_sha256": "3804cec21e22d2fa8cf247b4d26194c45ab6f95b7c6c05644bfe42f6dff165d5"
   },
   "Industrial21": {
     "outputs": [
@@ -51,6 +51,6 @@
       "ct1300-e58a",
       "ct1300-e58a-b"
     ],
-    "src_sha256": "f5455581387d8b2e7132337eaa060b833b76b9cbf7d6e1e615c068e82e59fe66"
+    "src_sha256": "9de68fa43c7513dc90240562699c6c9b1b908e3639537f462d983f5a35e8979c"
   }
 }
