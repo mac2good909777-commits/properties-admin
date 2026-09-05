@@ -165,7 +165,6 @@ CONTACT = """
   <div class="ctc">
     <div class="ctc-top">
       <div class="ctc-who">
-        <div class="ctc-eyebrow">PROJECT CONTACT</div>
         <div class="ctc-name">張現傑<span>瑞禾開發　工業地產部業務總監</span></div>
         <a class="ctc-tel" href="%s">%s</a>
       </div>
