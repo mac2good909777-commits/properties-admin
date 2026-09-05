@@ -17,7 +17,7 @@
       "Industrial21",
       "Industrial21b"
     ],
-    "src_sha256": "201a507b6a230e4e3aae6c009112089c41aece7d3629fa83369d284569b502aa"
+    "src_sha256": "e6ad982c1d23fc39b81cc2fe114702b235d8ff2603222ae3258ddc3a84603ae6"
   },
   "TCIP2098": {
     "outputs": [
@@ -44,7 +44,7 @@
       "WangTian5483",
       "WangTian5483b"
     ],
-    "src_sha256": "c99f6a00f594b722b43ba3b855131f62181edb2170e335c545097e6036d0ad67"
+    "src_sha256": "7423310585bcd49f6104a3caeeedcfe105b1ef21a45d94ee85f03d20d1fe497c"
   },
   "ct1300-e58a": {
     "outputs": [

@@ -64,15 +64,15 @@ CSS = """<style>
 .ukpi .n em{font-style:normal;font-size:.5em;margin-left:5px;letter-spacing:.06em}
 .ukpi .l{margin-top:8px;font-size:15px;color:rgba(255,255,255,.86);letter-spacing:.03em;line-height:1.55}
 
-.uft{background:#15211A;color:#9DB29A;padding:52px 24px 44px;font-size:15px;line-height:1.9}
+.uft{background:#15211A;color:#9DB29A;padding:34px 24px 30px;font-size:15px;line-height:1.85}
 .uft-in{max-width:1000px;margin:0 auto;text-align:center}
 .uft-co{color:#E7EDE5;font-family:"Noto Serif TC",serif;font-weight:700;font-size:19px;letter-spacing:.05em}
-.uft-en{font-size:14px;letter-spacing:.14em;color:#7C8E7C;margin-top:5px}
+.uft-en{font-size:14px;letter-spacing:.1em;color:#7C8E7C;margin-top:6px}
 .uft-line{margin-top:18px}
 .uft-line b{color:#D8BC55;font-weight:700}
 .uft-line a{color:#D8BC55;text-decoration:none;font-weight:700}
 .uft-line a:hover{text-decoration:underline}
-.uft-note{margin-top:22px;padding-top:20px;border-top:1px solid #24352A;
+.uft-note{margin-top:18px;padding-top:16px;border-top:1px solid #24352A;
   font-size:14px;color:#7C8E7C;line-height:1.85;max-width:74ch;margin-left:auto;margin-right:auto}
 
 @media(max-width:820px){
@@ -125,10 +125,7 @@ FOOTER = """
 <footer class="uft">
   <div class="uft-in">
     <div class="uft-co">瑞禾不動產經紀股份有限公司</div>
-    <div class="uft-en">RUEI.HE REAL ESTATE BROKERAGE CO., LTD.</div>
-    <div class="uft-line">臺中市南屯區益豐路四段 91 號</div>
-    <div class="uft-line">專案負責人　<b>張現傑</b>　<a href="%s">%s</a><br>
-      不動產經紀人（108）中市經紀字第 01847 號</div>
+    <div class="uft-en">RUEI.HE REAL ESTATE BROKERAGE CO., LTD.　｜　臺中市南屯區益豐路四段 91 號</div>
     <div class="uft-note">
       本頁資訊依現有資料善意整理，僅供參考，不構成任何要約或承諾。
       面積、使用分區、建物登記等以地政機關登記資料及不動產說明書為準；
@@ -136,7 +133,7 @@ FOOTER = """
     </div>
   </div>
 </footer>
-""" % (TEL_HREF, TEL_DISPLAY)
+"""
 
 # ---------------------------------------------------------------- 切割
 
