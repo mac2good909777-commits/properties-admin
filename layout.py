@@ -42,6 +42,7 @@ CSS = """<style>
 .uh-body{flex:1 1 460px;min-width:0}
 .uh-tag{display:inline-block;border:1px solid rgba(212,184,74,.85);color:#E4CE7C;
   font-size:15px;letter-spacing:.24em;padding:7px 18px;border-radius:2px;margin-bottom:20px}
+.uh-w{display:inline-block}
 .uh-h1{font-family:"Noto Serif TC",serif;font-weight:900;letter-spacing:.03em;
   font-size:clamp(34px,5.4vw,58px);line-height:1.16;margin:0;color:#fff;
   text-shadow:0 2px 18px rgba(0,0,0,.4);text-wrap:balance}
@@ -101,6 +102,9 @@ def hero_html(h):
     kpis = "".join(
         '<div><div class="n">%s<em>%s</em></div><div class="l">%s</div></div>' % (n, u, l)
         for n, u, l in h["kpis"])
+    # 標題用全形空格分段，各段包成 inline-block，手機才不會從詞中間斷行
+    title = "".join('<span class="uh-w">%s</span>' % t
+                    for t in h["title"].split("　") if t)
     return """
 <section class="%s"%s>
   <div class="uh-in">
@@ -117,7 +121,7 @@ def hero_html(h):
   </div>
 </section>
 <div class="ukpi"><div class="ukpi-in">%s</div></div>
-""" % (cls, style, LOGO, h["eyebrow"], h["title"], h["sub"],
+""" % (cls, style, LOGO, h["eyebrow"], title, h["sub"],
        TEL_HREF, TEL_DISPLAY, b2, kpis)
 
 
