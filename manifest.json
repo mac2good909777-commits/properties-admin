@@ -1,4 +1,25 @@
 {
+  "ChangBinPlating": {
+    "outputs": [
+      "ChangBinPlating",
+      "ChangBinPlatingb"
+    ],
+    "src_sha256": "3b2bcdbd9512e29a6194a7f4862d71c4ffe409f46acd1d9de746f1fab67a2262"
+  },
+  "DaliCluster": {
+    "outputs": [
+      "DaliCluster",
+      "DaliClusterb"
+    ],
+    "src_sha256": "0cdd9dc0305b0d454e2b0f73da4bae1e351b6ea52161d0054c4a7f72467c4dbb"
+  },
+  "Guanlian2": {
+    "outputs": [
+      "Guanlian2",
+      "Guanlian2b"
+    ],
+    "src_sha256": "56239aad5fa1585643741e5271619e0d4004a1d3885b1456b22a29f5b7d992b6"
+  },
   "Guanlian766": {
     "outputs": [
       "Guanlian766",
@@ -18,6 +39,13 @@
       "Industrial21b"
     ],
     "src_sha256": "e6ad982c1d23fc39b81cc2fe114702b235d8ff2603222ae3258ddc3a84603ae6"
+  },
+  "KiloPing2": {
+    "outputs": [
+      "KiloPing2",
+      "KiloPing2b"
+    ],
+    "src_sha256": "69a189fb27abcbe9fd0258de64967ef172258f1d5e78f11db4220c43c48191cb"
   },
   "TCIP2098": {
     "outputs": [
