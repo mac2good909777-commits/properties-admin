@@ -102,7 +102,8 @@ footer a{color:var(--forest)}
   </div>
 
 %s
-  <footer>共 %d 案　·　資料更新 %s　·　<a href="../">回管理台帳</a></footer>
+  <footer>共 %d 案在售／在租　·　資料更新 %s　·　<a href="../">回管理台帳</a><br>
+  <span style="font-size:14px">已結案與顧問頁不列於本頁，需要時請到管理台帳取連結。</span></footer>
 </div>
 
 <script>
@@ -141,7 +142,9 @@ ROW = """    <div class="row">
 
 
 def build(cases, out_dir=None, updated=""):
+    """只列在售／在租與潛銷案；已結案與顧問頁不進電子報連結頁。"""
     out_dir = out_dir or os.path.join(ADMIN, "links")
+    cases = [c for c in cases if c.get("status") not in ("done", "other")]
     blocks = []
     for c in cases:
         st, cls = STATUS.get(c.get("status", "live"), ("", "off"))
