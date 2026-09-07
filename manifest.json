@@ -6,12 +6,26 @@
     ],
     "src_sha256": "3b2bcdbd9512e29a6194a7f4862d71c4ffe409f46acd1d9de746f1fab67a2262"
   },
+  "DajiaSRC": {
+    "outputs": [
+      "DajiaSRC",
+      "DajiaSRCb"
+    ],
+    "src_sha256": "6df810f8d6806880af610af6b3e27569cc3191dd1d76a228093892a920a7d553"
+  },
   "DaliCluster": {
     "outputs": [
       "DaliCluster",
       "DaliClusterb"
     ],
     "src_sha256": "0cdd9dc0305b0d454e2b0f73da4bae1e351b6ea52161d0054c4a7f72467c4dbb"
+  },
+  "DayaCrane": {
+    "outputs": [
+      "DayaCrane",
+      "DayaCraneb"
+    ],
+    "src_sha256": "4bf9035469472ba19f7198652269bd040d15fe67ed65f63e2cb579d818246c3a"
   },
   "Guanlian2": {
     "outputs": [
