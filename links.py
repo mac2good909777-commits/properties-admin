@@ -142,9 +142,10 @@ ROW = """    <div class="row">
 
 
 def build(cases, out_dir=None, updated=""):
-    """只列在售／在租與潛銷案；已結案與顧問頁不進電子報連結頁。"""
+    """只列在售／在租與潛銷案；已結案、顧問頁、skip_links 者不進電子報連結頁。"""
     out_dir = out_dir or os.path.join(ADMIN, "links")
-    cases = [c for c in cases if c.get("status") not in ("done", "other")]
+    cases = [c for c in cases
+             if c.get("status") not in ("done", "other") and not c.get("skip_links")]
     blocks = []
     for c in cases:
         st, cls = STATUS.get(c.get("status", "live"), ("", "off"))
