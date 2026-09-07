@@ -606,6 +606,7 @@
     },
     {
       "code": "KiloPing2",
+      "skip_links": true,
       "name": "千坪級合法廠房　雙案",
       "loc": "臺中市大甲區・大雅區",
       "kind": "sale",
