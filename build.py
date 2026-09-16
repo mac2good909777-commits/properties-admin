@@ -26,6 +26,7 @@ import hashlib, io, json, os, re, sys
 
 import layout   # 統一 HERO／KPI／footer
 import links    # 電子報連結頁
+import ledger   # 管理台帳表格同步
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 SRC   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src"
@@ -220,6 +221,8 @@ if __name__ == "__main__":
         import datetime
         n = links.build(cases, updated=datetime.date.today().strftime("%Y-%m-%d"))
         print("電子報連結頁 %d 案" % n)
+        nc, np = ledger.sync(cases)
+        print("管理台帳 %d 案 %d 頁" % (nc, np))
     else:
         rows = check(cases)
         if not rows:

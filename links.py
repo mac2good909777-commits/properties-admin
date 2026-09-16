@@ -98,7 +98,9 @@ footer a{color:var(--forest)}
     <b>完整版</b>　頁尾有四張團隊卡（關於瑞禾／關於現傑／睦聚現傑／購廠分析）。
     <b>電子報、認識的對象用這個。</b><br>
     <b>簡版</b>　只留關於瑞禾＋關於現傑，不導流到睦聚平台與購廠分析。
-    <b>一般散發、同業、屋主用這個。</b>
+    <b>一般散發、同業、屋主用這個。</b><br>
+    <b>同事版</b>　只有關於瑞禾一張卡，頁面上完全沒有現傑的姓名、電話與 LINE。
+    <b>給公司同事發送時用這個。</b>
   </div>
 
 %s
@@ -157,6 +159,10 @@ def build(cases, out_dir=None, updated=""):
             rows += ROW % ("簡版", "兩卡・散發",
                            BASE + bc + "/", BASE + bc + "/",
                            BASE + bc + "/", BASE + bc + "/")
+            cc = bc[:-1] + "c" if bc.endswith("b") else bc
+            rows += ROW % ("同事版", "一卡・無個資",
+                           BASE + cc + "/", BASE + cc + "/",
+                           BASE + cc + "/", BASE + cc + "/")
         blocks.append(
             '  <div class="case%s">\n'
             '    <div class="hd"><div class="nm">%s</div>'
