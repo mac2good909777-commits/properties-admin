@@ -66,8 +66,12 @@ CARDS = [
 ]
 
 
-def team_block(full=True):
-    cs = CARDS if full else CARDS[:2]
+TEAM_COUNT = {"full": 4, "brief": 2, "colleague": 1}
+
+
+def team_block(mode="full"):
+    """full 四卡／brief 兩卡／colleague 只有「關於瑞禾」一張。"""
+    cs = CARDS[:TEAM_COUNT[mode]]
     cards = "".join(
         '      <a class="kya-card" href="%s" target="_blank" rel="noopener">\n'
         '        <div class="kya-tag">%s</div><h4>%s</h4>\n'
@@ -95,12 +99,12 @@ def strip_team(html):
     return html
 
 
-def with_team(html, full):
+def with_team(html, mode="full"):
     html = strip_team(html)
     m = re.search(r'<footer', html)
     if not m:
         raise RuntimeError("找不到 <footer>，無法決定插入位置")
-    return html[:m.start()] + team_block(full) + html[m.start():]
+    return html[:m.start()] + team_block(mode) + html[m.start():]
 
 
 def with_noindex(html):
@@ -114,6 +118,11 @@ def with_noindex(html):
 def brief_code(code):
     """簡版目錄：一般接 b；含「-」亂碼後綴者接 -b。"""
     return code + ("-b" if "-" in code else "b")
+
+
+def colleague_code(code):
+    """同事版目錄：一般接 c；含「-」亂碼後綴者接 -c。"""
+    return code + ("-c" if "-" in code else "c")
 
 # ---------------------------------------------------------------- 主流程
 
@@ -168,7 +177,7 @@ def build(cases, only=None):
             raw = layout.apply(raw, c["hero"], c.get("im"))
 
         # 可讀性處理放在最後，才涵蓋得到後面才插入的團隊卡
-        full = with_team(raw, True) if c.get("team") == "full" else strip_team(raw)
+        full = with_team(raw, "full") if c.get("team") == "full" else strip_team(raw)
         full = layout.readability(full)
         if c.get("noindex_main"):
             full = with_noindex(full)
@@ -180,8 +189,17 @@ def build(cases, only=None):
             bc = brief_code(c["code"])
             os.makedirs(os.path.join(DST, bc), exist_ok=True)
             io.open(os.path.join(DST, bc, "index.html"), "w", encoding="utf-8"
-                    ).write(with_noindex(layout.readability(with_team(raw, False))))
+                    ).write(with_noindex(layout.readability(with_team(raw, "brief"))))
             made.append(bc)
+
+            # 同事版：hero 無電話、無專案窗口段、團隊卡只留「關於瑞禾」
+            col = layout.apply(io.open(src, encoding="utf-8").read(),
+                               c["hero"], c.get("im"), colleague=True)
+            cc = colleague_code(c["code"])
+            os.makedirs(os.path.join(DST, cc), exist_ok=True)
+            io.open(os.path.join(DST, cc, "index.html"), "w", encoding="utf-8"
+                    ).write(with_noindex(layout.readability(with_team(col, "colleague"))))
+            made.append(cc)
 
         man[c["code"]] = {"src_sha256": sha(src), "outputs": made}
         done.append((c["code"], made))

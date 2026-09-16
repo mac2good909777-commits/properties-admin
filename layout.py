@@ -90,13 +90,23 @@ MASK = "linear-gradient(rgba(16,26,15,.42),rgba(16,26,15,.80))"
 
 # ---------------------------------------------------------------- 組件
 
-def hero_html(h):
-    """h = cases.json 的 hero 設定 dict（image 已解析成實際 data URI 或 None）"""
+def hero_html(h, phone=True):
+    """h = cases.json 的 hero 設定 dict（image 已解析成實際 data URI 或 None）
+
+    phone=False 用於同事版：不放專案負責人電話按鈕。
+    """
     bg = h.get("_uri")
     style = ' style="background-image:%s,url(\'%s\')"' % (MASK, bg) if bg else ""
     cls = "uh" if bg else "uh uh-txt"
     cta2 = h.get("cta2") or {}
-    b2 = ('<a class="uh-btn uh-b2" href="%s">%s</a>' % (cta2["href"], cta2["label"])) if cta2 else ""
+    b1 = ('<a class="uh-btn uh-b1" href="%s">&#9742;　專案負責人 %s</a>'
+          % (TEL_HREF, TEL_DISPLAY)) if phone else ""
+    if cta2:
+        # 同事版沒有電話鈕時，次要按鈕升級為主要樣式
+        b2 = '<a class="uh-btn uh-%s" href="%s">%s</a>' % (
+            "b2" if phone else "b1", cta2["href"], cta2["label"])
+    else:
+        b2 = ""
     kpis = "".join(
         '<div><div class="n">%s<em>%s</em></div><div class="l">%s</div></div>' % (n, u, l)
         for n, u, l in h["kpis"])
@@ -112,15 +122,14 @@ def hero_html(h):
       <h1 class="uh-h1">%s</h1>
       <div class="uh-sub">%s</div>
       <div class="uh-cta">
-        <a class="uh-btn uh-b1" href="%s">&#9742;　專案負責人 %s</a>
+        %s
         %s
       </div>
     </div>
   </div>
 </section>
 <div class="ukpi"><div class="ukpi-in">%s</div></div>
-""" % (cls, style, LOGO, h["eyebrow"], title, h["sub"],
-       TEL_HREF, TEL_DISPLAY, b2, kpis)
+""" % (cls, style, LOGO, h["eyebrow"], title, h["sub"], b1, b2, kpis)
 
 
 IM_CSS = """<style>
@@ -310,8 +319,30 @@ def _nth_image(html, n):
     return imgs[n] if n < len(imgs) else None
 
 
-def apply(html, hero_cfg, im_cfg=None):
-    """換掉原頁的 hero（含緊接的 KPI 條）與 footer，插入統一版型。"""
+def _scrub_personal(html):
+    """同事版：把 meta 描述等處的姓名與電話拿掉，分享預覽也不會帶出來。"""
+    def fix(m):
+        txt = m.group(2)
+        txt = re.sub(r"[，,、]?\s*瑞禾開發\s*張現傑\s*0?953[-\d\s]*", "", txt)
+        txt = re.sub(r"[，,、]?\s*張現傑\s*0?953[-\d\s]*", "", txt)
+        txt = re.sub(r"0953[-\s]?909[-\s]?777", "", txt)
+        txt = re.sub(r"張現傑", "", txt)
+        txt = re.sub(r"\s{2,}", " ", txt).strip().rstrip("，,、")
+        if txt and not txt.endswith("。"):
+            txt += "。"
+        return m.group(1) + txt + m.group(3)
+
+    html = re.sub(r'(<meta[^>]*name="description"[^>]*content=")([^"]*)(")', fix, html)
+    html = re.sub(r'(<meta[^>]*property="og:description"[^>]*content=")([^"]*)(")', fix, html)
+    return html
+
+
+def apply(html, hero_cfg, im_cfg=None, colleague=False):
+    """換掉原頁的 hero（含緊接的 KPI 條）與 footer，插入統一版型。
+
+    colleague=True 產生同事版：hero 不放電話按鈕、不放「專案窗口」整段，
+    頁面上不出現張現傑的姓名、電話與 LINE QR。
+    """
     cfg = dict(hero_cfg)
 
     # 1. 決定底圖
@@ -347,11 +378,12 @@ def apply(html, hero_cfg, im_cfg=None):
     fonts = "" if "Noto+Serif+TC" in html else FONTS
     html = html.replace("</head>", fonts + CSS + IM_CSS + CONTACT_CSS + "\n</head>", 1)
     m = re.search(r"<body[^>]*>", html)
-    html = html[:m.end()] + "\n" + hero_html(cfg) + html[m.end():]
+    html = html[:m.end()] + "\n" + hero_html(cfg, phone=not colleague) + html[m.end():]
     m = re.search(r"</body>", html)
     # 尾段固定順序：備索 → 專案窗口 →（團隊卡由 build.py 插入）→ footer
-    tail = (im_html(im_cfg) if im_cfg else "") + CONTACT + FOOTER
-    return html[:m.start()] + tail + "\n" + html[m.start():]
+    tail = (im_html(im_cfg) if im_cfg else "") + ("" if colleague else CONTACT) + FOOTER
+    html = html[:m.start()] + tail + "\n" + html[m.start():]
+    return _scrub_personal(html) if colleague else html
 
 
 # ---------------------------------------------------------------- 可讀性

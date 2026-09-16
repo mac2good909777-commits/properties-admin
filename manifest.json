@@ -2,42 +2,48 @@
   "ChangBinPlating": {
     "outputs": [
       "ChangBinPlating",
-      "ChangBinPlatingb"
+      "ChangBinPlatingb",
+      "ChangBinPlatingc"
     ],
     "src_sha256": "3b2bcdbd9512e29a6194a7f4862d71c4ffe409f46acd1d9de746f1fab67a2262"
   },
   "DajiaSRC": {
     "outputs": [
       "DajiaSRC",
-      "DajiaSRCb"
+      "DajiaSRCb",
+      "DajiaSRCc"
     ],
     "src_sha256": "6df810f8d6806880af610af6b3e27569cc3191dd1d76a228093892a920a7d553"
   },
   "DaliCluster": {
     "outputs": [
       "DaliCluster",
-      "DaliClusterb"
+      "DaliClusterb",
+      "DaliClusterc"
     ],
     "src_sha256": "0cdd9dc0305b0d454e2b0f73da4bae1e351b6ea52161d0054c4a7f72467c4dbb"
   },
   "DayaCrane": {
     "outputs": [
       "DayaCrane",
-      "DayaCraneb"
+      "DayaCraneb",
+      "DayaCranec"
     ],
     "src_sha256": "4bf9035469472ba19f7198652269bd040d15fe67ed65f63e2cb579d818246c3a"
   },
   "Guanlian2": {
     "outputs": [
       "Guanlian2",
-      "Guanlian2b"
+      "Guanlian2b",
+      "Guanlian2c"
     ],
     "src_sha256": "56239aad5fa1585643741e5271619e0d4004a1d3885b1456b22a29f5b7d992b6"
   },
   "Guanlian766": {
     "outputs": [
       "Guanlian766",
-      "Guanlian766b"
+      "Guanlian766b",
+      "Guanlian766c"
     ],
     "src_sha256": "6c81e99b203f4a5b02cc808600dd73fbde15f3a152b15284d1b61112d646ef8e"
   },
@@ -50,28 +56,32 @@
   "Industrial21": {
     "outputs": [
       "Industrial21",
-      "Industrial21b"
+      "Industrial21b",
+      "Industrial21c"
     ],
     "src_sha256": "e6ad982c1d23fc39b81cc2fe114702b235d8ff2603222ae3258ddc3a84603ae6"
   },
   "KiloPing2": {
     "outputs": [
       "KiloPing2",
-      "KiloPing2b"
+      "KiloPing2b",
+      "KiloPing2c"
     ],
     "src_sha256": "69a189fb27abcbe9fd0258de64967ef172258f1d5e78f11db4220c43c48191cb"
   },
   "TCIP2098": {
     "outputs": [
       "TCIP2098",
-      "TCIP2098b"
+      "TCIP2098b",
+      "TCIP2098c"
     ],
     "src_sha256": "e6664633caab7f0db8d70cce03f0beea61aaeb9fc05f87d8d369988d425d5e7b"
   },
   "TCIP3464": {
     "outputs": [
       "TCIP3464",
-      "TCIP3464b"
+      "TCIP3464b",
+      "TCIP3464c"
     ],
     "src_sha256": "57c865f618cb43f5313f57c37316febde3a1dbcc487d1c79480a7933da6d6e49"
   },
@@ -84,14 +94,16 @@
   "WangTian5483": {
     "outputs": [
       "WangTian5483",
-      "WangTian5483b"
+      "WangTian5483b",
+      "WangTian5483c"
     ],
-    "src_sha256": "f1af620eef3350499aeab2c37359be4cc4e52ba82d82a6ca8109a7ae73bb67c6"
+    "src_sha256": "2f6558b5d082973b5dfc356837c0d194ddced2a08f6b062680941909b0fc7b0e"
   },
   "ct1300-e58a": {
     "outputs": [
       "ct1300-e58a",
-      "ct1300-e58a-b"
+      "ct1300-e58a-b",
+      "ct1300-e58a-c"
     ],
     "src_sha256": "9de68fa43c7513dc90240562699c6c9b1b908e3639537f462d983f5a35e8979c"
   }
