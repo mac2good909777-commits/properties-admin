@@ -45,7 +45,7 @@
       "Guanlian2b",
       "Guanlian2c"
     ],
-    "src_sha256": "56239aad5fa1585643741e5271619e0d4004a1d3885b1456b22a29f5b7d992b6"
+    "src_sha256": "a4a7c6de865d1164277ca1cb8ffdf9bd024792886bc8da14763753763529c4b2"
   },
   "Guanlian766": {
     "outputs": [
@@ -53,7 +53,7 @@
       "Guanlian766b",
       "Guanlian766c"
     ],
-    "src_sha256": "600ec9807a307583631feab805d666c83e794abeb5873736e91c3132d34ba980"
+    "src_sha256": "604af18441ca962a82c8e42f3006b1ab712b4d4901f9229985e5db6b8ed08670"
   },
   "HotaChiayi3": {
     "outputs": [
