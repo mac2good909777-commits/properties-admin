@@ -30,8 +30,8 @@ import ledger   # 管理台帳表格同步
 import copy as copytext   # 591／臉書文案速查頁
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
-SRC   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src"
-DST   = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties"
+SRC   = r"C:\Claude\projects\properties-src"
+DST   = r"C:\Claude\projects\properties"
 MANIFEST = os.path.join(ADMIN, "manifest.json")
 
 # ---------------------------------------------------------------- 團隊區塊

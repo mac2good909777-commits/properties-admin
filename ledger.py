@@ -15,7 +15,7 @@ ledger.py　—— 台帳表格與摘要自動同步
 import io, json, os, re, subprocess
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
-SRC = r"C:\Users\dell\Documents\Claude-DT\projects\20260904-主題行銷頁\properties-src"
+SRC = r"C:\Claude\projects\properties-src"
 BASE = "https://mac2good909777-commits.github.io/properties/"
 
 STATUS = {"live": ("在售", "t-live"), "quiet": ("潛銷", "t-warm"),
