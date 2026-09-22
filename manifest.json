@@ -59,7 +59,7 @@
     "outputs": [
       "HotaChiayi3"
     ],
-    "src_sha256": "3804cec21e22d2fa8cf247b4d26194c45ab6f95b7c6c05644bfe42f6dff165d5"
+    "src_sha256": "5c14bf224654a5a0b214b52a356f143a84a8e3e73244054306d477fc593a8dbd"
   },
   "Industrial21": {
     "outputs": [
@@ -83,7 +83,7 @@
       "TCIP2098b",
       "TCIP2098c"
     ],
-    "src_sha256": "af321ccb7467f85c82fdf4a8dbefef6e8b22c387ac24cfa39ef5091f6b434e1b"
+    "src_sha256": "8536552692c6aae23717303c0838cd0b11cb9708fb42bd72c050e5ea50d66990"
   },
   "TCIP3464": {
     "outputs": [
@@ -97,7 +97,7 @@
     "outputs": [
       "TCIP38-parking"
     ],
-    "src_sha256": "fe9f75e046f18be538397b3d3813e23d543159238b2355245400cbfa729c9063"
+    "src_sha256": "6c7158673c547ffc97a21deac257fbcbdc40d5a960daeb1d3ebfdaafbcbbccaa"
   },
   "WangTian5483": {
     "outputs": [
@@ -105,7 +105,7 @@
       "WangTian5483b",
       "WangTian5483c"
     ],
-    "src_sha256": "57641aea85576f3f1dfbcee53689fdfe192cc606e94a4dbba8888d4a91b07c10"
+    "src_sha256": "9033d7787989151a4bb888e5805e0ba01dbb9ca6fe8c50b72a8a39f3047636f3"
   },
   "ct1300-e58a": {
     "outputs": [
