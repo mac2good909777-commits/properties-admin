@@ -541,7 +541,7 @@
     },
     {
       "code": "DaliCluster",
-      "name": "大里工業聚落　四案",
+      "name": "大里產業園區　四案",
       "loc": "臺中市大里區・大里工業區／大里產業園區",
       "kind": "sale",
       "status": "live",
@@ -555,7 +555,7 @@
       "hero": {
         "image": 0,
         "eyebrow": "DALI INDUSTRIAL CLUSTER",
-        "title": "大里工業聚落　四案聯售",
+        "title": "大里產業園區　四案聯售",
         "sub": "建物 585 ～ 1,380 坪｜總價 2.98 ～ 3.98 億｜國道三號霧峰交流道・台 74・129 縣道",
         "cta2": {
           "label": "索取完整銷售報告書",
