@@ -394,6 +394,13 @@ html{-webkit-text-size-adjust:100%}
 img,svg,video{max-width:100%;height:auto}
 .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
 .tbl-scroll>table{min-width:520px}
+/* 兩欄式規格表：手機上直接塞進畫面，不必左右滑 */
+.tbl-fit{overflow-x:visible}
+.tbl-fit>table{min-width:0;width:100%}
+@media(max-width:640px){
+  .tbl-fit>table th{white-space:normal;width:34%;padding-left:12px;padding-right:12px}
+  .tbl-fit>table td{padding-left:12px;padding-right:12px;word-break:break-word}
+}
 @media(max-width:640px){
   h1{line-height:1.28}
   h2{line-height:1.36}
@@ -415,6 +422,14 @@ def _bump(px):
     return 15.5
 
 
+def _two_col(tbl):
+    """判斷是否為 th/td 兩欄式規格表（每列最多 2 格）——這種表手機上不該橫捲。"""
+    rows = re.findall(r"(?is)<tr\b.*?</tr>", tbl)
+    if not rows:
+        return False
+    return all(len(re.findall(r"(?i)<t[hd]\b", r)) <= 2 for r in rows)
+
+
 def readability(html):
     """字級下限 14px、無捲軸的表格包一層、補上手機適配樣式。"""
     def fix(m):
@@ -431,7 +446,8 @@ def readability(html):
             continue
         spots.append((a, _cut(html, a)[1]))
     for a, e in reversed(spots):
-        html = html[:a] + '<div class="tbl-scroll">' + html[a:e] + "</div>" + html[e:]
+        cls = "tbl-scroll tbl-fit" if _two_col(html[a:e]) else "tbl-scroll"
+        html = html[:a] + '<div class="%s">' % cls + html[a:e] + "</div>" + html[e:]
 
     if "tbl-scroll{overflow-x" not in html:
         html = html.replace("</head>", MOBILE_CSS + "\n</head>", 1)
