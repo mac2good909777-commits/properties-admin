@@ -11,6 +11,8 @@ links.py　—— 產生「電子報連結頁」
 """
 import io, json, os
 
+import ga   # GA4 埋碼
+
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://mac2good909777-commits.github.io/properties/"
 
@@ -173,5 +175,5 @@ def build(cases, out_dir=None, updated=""):
 
     os.makedirs(out_dir, exist_ok=True)
     io.open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8").write(
-        PAGE % ("\n".join(blocks), len(cases), updated))
+        ga.inject(PAGE % ("\n".join(blocks), len(cases), updated)))
     return len(cases)

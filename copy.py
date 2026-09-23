@@ -9,6 +9,8 @@ copy.py　—— 產生「591／臉書文案速查」頁
 import html as _html
 import io, json, os
 
+import ga   # GA4 埋碼
+
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://mac2good909777-commits.github.io/properties/"
 
@@ -163,5 +165,5 @@ def build(cases, out_dir=None, updated=""):
 
     os.makedirs(out_dir, exist_ok=True)
     io.open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8").write(
-        PAGE % ("\n".join(blocks), n, updated))
+        ga.inject(PAGE % ("\n".join(blocks), n, updated)))
     return n

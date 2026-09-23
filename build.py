@@ -28,6 +28,7 @@ import layout   # 統一 HERO／KPI／footer
 import links    # 電子報連結頁
 import ledger   # 管理台帳表格同步
 import copy as copytext   # 591／臉書文案速查頁
+import ga      # GA4 埋碼
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 SRC   = r"C:\Claude\projects\properties-src"
@@ -184,14 +185,14 @@ def build(cases, only=None):
         if c.get("noindex_main"):
             full = with_noindex(full)
         os.makedirs(os.path.join(DST, c["code"]), exist_ok=True)
-        io.open(os.path.join(DST, c["code"], "index.html"), "w", encoding="utf-8").write(full)
+        io.open(os.path.join(DST, c["code"], "index.html"), "w", encoding="utf-8").write(ga.inject(full))
         made = [c["code"]]
 
         if c.get("brief"):
             bc = brief_code(c["code"])
             os.makedirs(os.path.join(DST, bc), exist_ok=True)
             io.open(os.path.join(DST, bc, "index.html"), "w", encoding="utf-8"
-                    ).write(with_noindex(layout.readability(with_team(raw, "brief"))))
+                    ).write(ga.inject(with_noindex(layout.readability(with_team(raw, "brief")))))
             made.append(bc)
 
             # 同事版：hero 無電話、無專案窗口段、團隊卡只留「關於瑞禾」
@@ -200,7 +201,7 @@ def build(cases, only=None):
             cc = colleague_code(c["code"])
             os.makedirs(os.path.join(DST, cc), exist_ok=True)
             io.open(os.path.join(DST, cc, "index.html"), "w", encoding="utf-8"
-                    ).write(with_noindex(layout.readability(with_team(col, "colleague"))))
+                    ).write(ga.inject(with_noindex(layout.readability(with_team(col, "colleague")))))
             made.append(cc)
 
         man[c["code"]] = {"src_sha256": sha(src), "outputs": made}
