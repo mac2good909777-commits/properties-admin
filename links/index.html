@@ -8,7 +8,17 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-H5VLHW8761');
+  // 自家裝置標記：任一頁加 ?ga=off 造訪一次，之後該瀏覽器的流量都標成 internal，
+  // 由 GA 的「內部流量」資料篩選器排除；?ga=on 解除。
+  (function(){
+    var K='ga_internal', q=location.search, internal=false;
+    try{
+      if(q.indexOf('ga=off')>-1){ localStorage.setItem(K,'1'); }
+      if(q.indexOf('ga=on')>-1){ localStorage.removeItem(K); }
+      internal = localStorage.getItem(K)==='1';
+    }catch(e){}
+    gtag('config','G-H5VLHW8761', internal ? {traffic_type:'internal'} : {});
+  })();
 </script>
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
