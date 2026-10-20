@@ -15,7 +15,8 @@
 """
 import io, os, re, sys
 
-REPO = r"C:\Claude\projects\properties"
+# 三個 repo 並列在同一個專案資料夾（DT／NB 皆為 20260904-主題行銷頁\），用相對路徑兩機通用
+REPO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "properties")
 
 # 不套用本規則的目錄
 SKIP = {

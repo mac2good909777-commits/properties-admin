@@ -31,8 +31,9 @@ import copy as copytext   # 591／臉書文案速查頁
 import ga      # GA4 埋碼
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
-SRC   = r"C:\Claude\projects\properties-src"
-DST   = r"C:\Claude\projects\properties"
+# 三個 repo 並列在同一個專案資料夾（DT／NB 皆為 20260904-主題行銷頁\），用相對路徑兩機通用
+SRC   = os.path.join(os.path.dirname(ADMIN), "properties-src")
+DST   = os.path.join(os.path.dirname(ADMIN), "properties")
 MANIFEST = os.path.join(ADMIN, "manifest.json")
 
 # ---------------------------------------------------------------- 團隊區塊

@@ -24,6 +24,9 @@ ga.py　—— Google Analytics 4 埋碼
 `traffic_type` 參數：在任一頁網址後面加 `?ga=off` 造訪一次，該瀏覽器就會被
 記成內部流量（localStorage，per-origin），GA 端再用「內部流量」資料篩選器排除。
 `?ga=on` 解除。手機也適用，換 IP 不受影響。
+
+本機開發流量（localhost／127.0.0.1／file://）一律自動標成 internal。
+2026-10-20 加：一個月內有 24 筆本機測試瀏覽混進正式報表（含一筆 XSS 測試標題）。
 """
 import re
 
@@ -37,13 +40,15 @@ SNIPPET = """<!-- Google tag (gtag.js) — GA4 -->
   gtag('js', new Date());
   // 自家裝置標記：任一頁加 ?ga=off 造訪一次，之後該瀏覽器的流量都標成 internal，
   // 由 GA 的「內部流量」資料篩選器排除；?ga=on 解除。
+  // 本機開發（localhost／127.0.0.1／file://）一律算 internal，不污染正式報表。
   (function(){
-    var K='ga_internal', q=location.search, internal=false;
+    var K='ga_internal', q=location.search, h=location.hostname, internal=false;
     try{
       if(q.indexOf('ga=off')>-1){ localStorage.setItem(K,'1'); }
       if(q.indexOf('ga=on')>-1){ localStorage.removeItem(K); }
       internal = localStorage.getItem(K)==='1';
     }catch(e){}
+    if(h==='localhost'||h==='127.0.0.1'||h==='[::1]'||h===''||location.protocol==='file:'){ internal=true; }
     gtag('config','%s', internal ? {traffic_type:'internal'} : {});
   })();
 </script>
