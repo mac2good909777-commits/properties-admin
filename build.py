@@ -29,6 +29,7 @@ import links    # 電子報連結頁
 import ledger   # 管理台帳表格同步
 import copy as copytext   # 591／臉書文案速查頁
 import ga      # GA4 埋碼
+import stamp   # 「本頁更新」日期戳記
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 # 三個 repo 並列在同一個專案資料夾（DT／NB 皆為 20260904-主題行銷頁\），用相對路徑兩機通用
@@ -186,14 +187,14 @@ def build(cases, only=None):
         if c.get("noindex_main"):
             full = with_noindex(full)
         os.makedirs(os.path.join(DST, c["code"]), exist_ok=True)
-        io.open(os.path.join(DST, c["code"], "index.html"), "w", encoding="utf-8").write(ga.inject(full))
+        stamp.write(os.path.join(DST, c["code"], "index.html"), ga.inject(full))
         made = [c["code"]]
 
         if c.get("brief"):
             bc = brief_code(c["code"])
             os.makedirs(os.path.join(DST, bc), exist_ok=True)
-            io.open(os.path.join(DST, bc, "index.html"), "w", encoding="utf-8"
-                    ).write(ga.inject(with_noindex(layout.readability(with_team(raw, "brief")))))
+            stamp.write(os.path.join(DST, bc, "index.html"),
+                        ga.inject(with_noindex(layout.readability(with_team(raw, "brief")))))
             made.append(bc)
 
             # 同事版：hero 無電話、無專案窗口段、團隊卡只留「關於瑞禾」
@@ -201,8 +202,8 @@ def build(cases, only=None):
                                c["hero"], c.get("im"), colleague=True)
             cc = colleague_code(c["code"])
             os.makedirs(os.path.join(DST, cc), exist_ok=True)
-            io.open(os.path.join(DST, cc, "index.html"), "w", encoding="utf-8"
-                    ).write(ga.inject(with_noindex(layout.readability(with_team(col, "colleague")))))
+            stamp.write(os.path.join(DST, cc, "index.html"),
+                        ga.inject(with_noindex(layout.readability(with_team(col, "colleague")))))
             made.append(cc)
 
         man[c["code"]] = {"src_sha256": sha(src), "outputs": made}
