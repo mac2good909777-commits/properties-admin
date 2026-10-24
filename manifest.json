@@ -45,7 +45,7 @@
       "Guanlian2b",
       "Guanlian2c"
     ],
-    "src_sha256": "a4a7c6de865d1164277ca1cb8ffdf9bd024792886bc8da14763753763529c4b2"
+    "src_sha256": "e80e032de3202e99eb82e65bf72797cfa76a0c7af2201a3e4cc3351010ae01a8"
   },
   "Guanlian766": {
     "outputs": [
@@ -53,7 +53,7 @@
       "Guanlian766b",
       "Guanlian766c"
     ],
-    "src_sha256": "c1fa1f1b67554e0f0a7349b395015344f751c5e456f46fe68e84d56bf475d386"
+    "src_sha256": "72d9ea05f7072f96573a1f164d003d528116556bee4d365e3a4cbcee2f5ded3c"
   },
   "HotaChiayi3": {
     "outputs": [
@@ -77,13 +77,29 @@
     ],
     "src_sha256": "69a189fb27abcbe9fd0258de64967ef172258f1d5e78f11db4220c43c48191cb"
   },
+  "TCIP1523": {
+    "outputs": [
+      "TCIP1523",
+      "TCIP1523b",
+      "TCIP1523c"
+    ],
+    "src_sha256": "35e8c256754c7fe2016b5b6ee9da164726182c3b19c45b12bb27c264fb52f2c3"
+  },
   "TCIP2098": {
     "outputs": [
       "TCIP2098",
       "TCIP2098b",
       "TCIP2098c"
     ],
-    "src_sha256": "8536552692c6aae23717303c0838cd0b11cb9708fb42bd72c050e5ea50d66990"
+    "src_sha256": "65660d4cd35d5ea9e77c2b03fa8a69eeb045567096db0d56a6b85733c3145897"
+  },
+  "TCIP247": {
+    "outputs": [
+      "TCIP247",
+      "TCIP247b",
+      "TCIP247c"
+    ],
+    "src_sha256": "39798cd079ebb877c1e1419310060b026a8d1adcce484334a391f5c11f2f595f"
   },
   "TCIP3464": {
     "outputs": [
@@ -98,6 +114,14 @@
       "TCIP38-parking"
     ],
     "src_sha256": "6c7158673c547ffc97a21deac257fbcbdc40d5a960daeb1d3ebfdaafbcbbccaa"
+  },
+  "TCIP698": {
+    "outputs": [
+      "TCIP698",
+      "TCIP698b",
+      "TCIP698c"
+    ],
+    "src_sha256": "79f0b51872ef81b5ba39eed2f08f59b568a44ba1e4eba043d49dc15a51dccc65"
   },
   "WangTian5483": {
     "outputs": [
