@@ -35,3 +35,16 @@ def find(repo):
 
 SRC = find("properties-src")   # A 原稿
 DST = find("properties")       # B 成品
+
+
+# ---- 原稿檔位置（2026-10-24 扁平化）------------------------------
+# A 原稿改為「一案一個 .html 檔、用案名命名」，記在 cases.json 的 src 欄。
+# 沒有 src 欄的舊案仍走 <code>/index.html，相容過渡期與 NB 尚未同步的情況。
+# B 成品維持 <code>/index.html —— 那是對外網址，改了舊連結就斷。
+def src_rel(case):
+    """原稿相對於 A 根目錄的路徑（git 指令用，一律正斜線）。"""
+    return case.get("src") or "%s/index.html" % case["code"]
+
+
+def src_file(case):
+    return os.path.join(SRC, *src_rel(case).split("/"))

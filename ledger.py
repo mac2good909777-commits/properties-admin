@@ -16,7 +16,7 @@ import io, json, os, re, subprocess
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 # 三個 repo 並列在同一個專案資料夾；本機資料夾名稱不限（可中文），依 git remote 辨識，見 repos.py
-from repos import SRC
+from repos import SRC, src_rel
 BASE = "https://mac2good909777-commits.github.io/properties/"
 
 STATUS = {"live": ("在售", "t-live"), "quiet": ("潛銷", "t-warm"),
@@ -31,16 +31,19 @@ def colleague_code(code):
     return code + ("-c" if "-" in code else "c")
 
 
-def _dates(code):
-    """回傳 (上架日, 更新日)，格式 MM/DD；取不到就回空字串。"""
-    path = "%s/index.html" % code
+def _dates(case):
+    """回傳 (上架日, 更新日)，格式 MM/DD；取不到就回空字串。
+
+    --follow：原稿 2026-10-24 由 <code>/index.html 改名成「案名.html」，要跨改名追到最初的新增。
+    更新日只看 A（新增）／M（修改），略過 R（純改名）—— 否則改名那天會變成每案的更新日。
+    """
+    path = src_rel(case)
+    git = ["git", "-c", "core.quotepath=off", "log", "--follow", "--format=%ad", "--date=format:%m/%d"]
     try:
-        first = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%ad", "--date=format:%m/%d", "--", path],
-            cwd=SRC, capture_output=True, text=True, timeout=20).stdout.strip().splitlines()
-        last = subprocess.run(
-            ["git", "log", "-1", "--format=%ad", "--date=format:%m/%d", "--", path],
-            cwd=SRC, capture_output=True, text=True, timeout=20).stdout.strip()
+        first = subprocess.run(git + ["--diff-filter=A", "--", path],
+            cwd=SRC, capture_output=True, text=True, encoding="utf-8", timeout=20).stdout.strip().splitlines()
+        last = subprocess.run(git + ["--diff-filter=AM", "-1", "--", path],
+            cwd=SRC, capture_output=True, text=True, encoding="utf-8", timeout=20).stdout.strip()
         return (first[-1] if first else last), last
     except Exception:
         return "", ""
@@ -61,7 +64,7 @@ def _row(c):
     label, cls = STATUS.get(c.get("status", "live"), ("", "t-off"))
     if c.get("kind") == "rent" and c.get("status") == "live":
         label = "在租"
-    up, upd = _dates(c["code"])
+    up, upd = _dates(c)
     note = ('\n      <div class="memo">%s</div>' % c["note"]) if c.get("note") else ""
     past = ' class="past"' if c.get("status") == "done" else ""
     return """<tr data-s="%s"%s>

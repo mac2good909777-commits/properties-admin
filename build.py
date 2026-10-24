@@ -33,7 +33,7 @@ import stamp   # 「本頁更新」日期戳記
 
 ADMIN = os.path.dirname(os.path.abspath(__file__))
 # 三個 repo 並列在同一個專案資料夾；本機資料夾名稱不限（可中文），依 git remote 辨識，見 repos.py
-from repos import SRC, DST
+from repos import SRC, DST, src_rel, src_file
 MANIFEST = os.path.join(ADMIN, "manifest.json")
 
 # ---------------------------------------------------------------- 團隊區塊
@@ -148,7 +148,7 @@ def load_manifest():
 def check(cases):
     man, rows = load_manifest(), []
     for c in cases:
-        src = os.path.join(SRC, c["code"], "index.html")
+        src = src_file(c)
         if not os.path.isfile(src):
             rows.append((c["code"], "原稿不存在於 A"))
             continue
@@ -158,11 +158,13 @@ def check(cases):
             rows.append((c["code"], "尚未建置"))
         elif was != h:
             rows.append((c["code"], "A 已異動，需重建"))
-    extra = [d for d in os.listdir(SRC)
-             if os.path.isdir(os.path.join(SRC, d)) and not d.startswith((".", "_"))
-             and d not in {c["code"] for c in cases}]
-    for d in extra:
-        rows.append((d, "A 有新案，cases.json 尚未登錄"))
+    # A 根目錄的 .html 檔（新制）與 <資料夾>/index.html（舊制），沒被任何案引用的就是新案
+    used = {src_rel(c) for c in cases}
+    found = [f for f in os.listdir(SRC) if f.endswith(".html")]
+    found += ["%s/index.html" % d for d in os.listdir(SRC)
+              if os.path.isfile(os.path.join(SRC, d, "index.html")) and not d.startswith((".", "_"))]
+    for f in sorted(set(found) - used):
+        rows.append((f, "A 有新案，cases.json 尚未登錄"))
     return rows
 
 
@@ -171,7 +173,7 @@ def build(cases, only=None):
     for c in cases:
         if only and c["code"] not in only:
             continue
-        src = os.path.join(SRC, c["code"], "index.html")
+        src = src_file(c)
         if not os.path.isfile(src):
             print("略過 %-16s 原稿不存在" % c["code"]); continue
         raw = io.open(src, encoding="utf-8").read()
