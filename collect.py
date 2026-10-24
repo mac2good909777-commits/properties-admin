@@ -15,8 +15,8 @@
 """
 import io, os, re, sys
 
-# 三個 repo 並列在同一個專案資料夾（DT／NB 皆為 20260904-主題行銷頁\），用相對路徑兩機通用
-REPO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "properties")
+# 三個 repo 並列在同一個專案資料夾；本機資料夾名稱不限（可中文），依 git remote 辨識，見 repos.py
+from repos import DST as REPO
 
 # 不套用本規則的目錄
 SKIP = {
