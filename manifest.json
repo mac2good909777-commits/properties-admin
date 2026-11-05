@@ -7,6 +7,14 @@
     ],
     "src_sha256": "30259a12bbcc987d8599dd246fd272dd742c37419882387d841e351f2ffa2e9d"
   },
+  "ChangBin1504": {
+    "outputs": [
+      "ChangBin1504",
+      "ChangBin1504b",
+      "ChangBin1504c"
+    ],
+    "src_sha256": "307268310d96c867973f036023c33828b3ba5d3da6f07d573485e2daab3e221d"
+  },
   "ChangBinPlating": {
     "outputs": [
       "ChangBinPlating",
