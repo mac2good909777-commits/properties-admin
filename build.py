@@ -224,12 +224,13 @@ if __name__ == "__main__":
         for code, made in build(cases, args or None):
             print("建置 %-16s -> %s" % (code, "、".join(made)))
         import datetime
-        n = links.build(cases, updated=datetime.date.today().strftime("%Y-%m-%d"))
+        newest = list(reversed(cases))   # cases.json 依新增順序排；三個管理頁越新的放上面（2026-11-05 Mac）
+        n = links.build(newest, updated=datetime.date.today().strftime("%Y-%m-%d"))
         print("電子報連結頁 %d 案" % n)
-        nc, np = ledger.sync(cases)
+        nc, np = ledger.sync(newest)
         print("管理台帳 %d 案 %d 頁" % (nc, np))
         print("文案速查頁 %d 案" % copytext.build(
-            cases, updated=datetime.date.today().strftime("%Y-%m-%d")))
+            newest, updated=datetime.date.today().strftime("%Y-%m-%d")))
     else:
         rows = check(cases)
         if not rows:
